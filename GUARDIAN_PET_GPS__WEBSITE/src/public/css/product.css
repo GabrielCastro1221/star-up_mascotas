@@ -1,0 +1,96 @@
+.product {
+    padding: 6em 0;
+    background: var(--cl--5--);
+    position: relative;
+}
+
+.product h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2em;
+    color: var(--cl--2--);
+    font-weight: 600;
+}
+
+.product h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.deals {
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg--1--);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+    margin-bottom: 3em;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+i {
+    margin-left: 0.5em;
+}
+
+.deals h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--cl--2--);
+    flex: 1 1 400px;
+}
+
+.deals-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5em;
+}
+
+.p-card {
+    background: var(--bg--1--);
+    border-radius: 16px;
+    box-shadow: var(--shadow--);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.p-card:hover {
+    transform: translateY(-6px);
+}
+
+.p-card .img {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5em;
+}
+
+.p-card img {
+    width: 100%;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1em;
+}
+
+.p-content {
+    text-align: center;
+}
+
+.p-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.p-content p {
+    font-size: 0.95rem;
+    color: var(--cl--2--);
+    margin-bottom: 1em;
+}

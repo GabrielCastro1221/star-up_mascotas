@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/css/profile-user.css">
+
+<section class="profile" id="profile">
+    <div class="container">
+        <h2>Perfil de <span>Usuario</span></h2>
+        <div class="profile-card">
+            <div class="profile-photo">
+                <img src="/assets/images/avatar.jpg" alt="Foto de usuario" id="user-photo">
+                <p id="update-photo">Subir foto</p>
+                <input type="file" id="file-input" name="foto" accept="image/*" style="display: none;">
+            </div>
+            <div class="profile-info">
+                <h3 id="user-name"></h3>
+                <p><span>Email:</span> <span id="user-email"></span></p>
+                <p><span>Rol:</span> <span id="user-rol"></span></p>
+                <p><span>Teléfono:</span> <span id="user-telefono"></span></p>
+                <p><span>Dirección:</span> <span id="user-direccion"></span></p>
+                <p><span>Ciudad:</span> <span id="user-ciudad"></span></p>
+                <p><span>Género:</span> <span id="user-genero"></span></p>
+                <p><span>Edad:</span> <span id="user-edad"></span></p>
+            </div>
+            <div class="profile-actions">
+                <a href="#" class="page-btn">
+                    Rastreo de Mascotas <i class="fi fi-rr-map-marker"></i>
+                </a>
+                <a href="#" class="page-btn" id="update-account-btn">
+                    Editar Datos <i class="fi fi-rr-edit"></i>
+                </a>
+                <a href="#" class="page-btn delete-account" id="delete-account-btn">
+                    Eliminar cuenta <i class="fi fi-rr-trash"></i>
+                </a>
+                <a href="#" class="page-btn delete-account" id="logout">
+                    Salir <i class="fi fi-rr-trash"></i>
+                </a>
+            </div>
+            {{> updateUserData }}
+        </div>
+    </div>
+</section>
+
+<script src="/js/profileUser/getData.js"></script>
+<script src="/js/profileUser/updateData.js"></script>
+<script src="/js/profileUser/deleteAccount.js"></script>

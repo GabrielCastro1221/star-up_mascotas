@@ -1,0 +1,100 @@
+paths:
+  /shipping:
+    post:
+      summary: Crear destino de envío
+      tags: [Shipping]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShippingInput"
+      responses:
+        "200":
+          description: Destino creado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shipping"
+        "400":
+          description: El destino ya existe
+        "500":
+          description: Error interno del servidor
+
+    get:
+      summary: Listar destinos de envío
+      tags: [Shipping]
+      responses:
+        "200":
+          description: Lista de destinos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Shipping"
+        "500":
+          description: Error interno del servidor
+
+  /shipping/{id}:
+    put:
+      summary: Actualizar destino de envío
+      tags: [Shipping]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShippingInput"
+      responses:
+        "200":
+          description: Destino actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shipping"
+        "404":
+          description: Destino no encontrado
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      summary: Eliminar destino de envío
+      tags: [Shipping]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Destino eliminado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shipping"
+        "404":
+          description: Destino no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Shipping:
+      type: object
+      properties:
+        _id: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d1 }
+        city_ship: { type: string, example: "Manizales" }
+        amount: { type: number, example: 15000 }
+
+    ShippingInput:
+      type: object
+      required: [city_ship, amount]
+      properties:
+        city_ship: { type: string, example: "Manizales" }
+        amount: { type: number, example: 15000 }

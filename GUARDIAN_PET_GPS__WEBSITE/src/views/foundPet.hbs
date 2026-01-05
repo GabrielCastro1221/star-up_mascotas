@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/css/tracking.css">
+
+<section class="tracking" id="tracking">
+    <div class="container">
+        <h2>Rastreo <span>Guardian Pet</span></h2>
+        <p class="intro">Busca y visualiza la ubicación de tus mascotas en tiempo real.</p>
+        <div class="filter row">
+            <input type="text" id="search" placeholder="Buscar por nombre, ID o dispositivo...">
+            <button class="page-btn" onclick="filtrarMascotas()">Buscar <i class="fi fi-rr-search"></i></button>
+        </div>
+        <div class="tracking-results column grid" id="results">
+            <div class="tracking-card">
+                <img src="/assets/images/mascota1.jpg" alt="Mascota 1">
+                <h3><span>Nombre: </span>Max</h3>
+                <p><span>ID: </span>00123</p>
+                <p><span>Última ubicación: </span>Neira, Caldas</p>
+                <p><span>Hora: </span>16:42</p>
+                <a href="#" class="page-btn">Ver en mapa</a>
+            </div>
+        </div>
+    </div>
+</section>

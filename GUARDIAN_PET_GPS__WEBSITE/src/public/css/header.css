@@ -1,0 +1,142 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+    padding: 1em 2em;
+    background: var(--cl--1--);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+}
+
+.logo img {
+    max-height: 100px;
+    width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+nav {
+    flex-grow: 1;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3em;
+    list-style: none;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cl--2--);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--cl--3--);
+}
+
+.page-btn {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--cl--1--);
+    background: var(--cl--3--);
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.page-btn:hover,
+.page-btn.active {
+    background: transparent;
+    color: var(--cl--3--);
+    border: 2px solid var(--cl--3--);
+}
+
+.toggle-menu {
+    display: none;
+    cursor: pointer;
+    background-image: url(../assets/images/menu-burger.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 28px;
+    width: 35px;
+    height: 35px;
+    transition: all 0.3s ease;
+}
+
+.lightDark {
+    cursor: pointer;
+    background-image: url(../assets/images/night-mode.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.lightDark.active {
+    background-image: url(../assets/images/day-mode.png);
+}
+
+@media screen and (max-width: 1150px) {
+    .toggle-menu {
+        display: block;
+    }
+
+    .toggle-menu.active {
+        position: fixed;
+        right: 5%;
+        top: 1.5em;
+        background-image: url(../assets/images/cross.svg);
+        background-size: 24px;
+        z-index: 1001;
+    }
+
+    .navigation {
+        position: fixed;
+        inset: 0;
+        background: var(--cl--1--);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.4s ease;
+        z-index: 999;
+    }
+
+    .navigation.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .navigation ul {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+
+    .navigation a {
+        font-size: 18px;
+        color: var(--cl--2--);
+    }
+
+    .page-btn {
+        font-size: 16px;
+        padding: 0.7em 1.2em;
+    }
+}

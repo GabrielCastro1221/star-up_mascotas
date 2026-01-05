@@ -1,0 +1,180 @@
+paths:
+  /tickets:
+    post:
+      summary: Crear ticket
+      tags: [Tickets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketInput"
+      responses:
+        "200":
+          description: Ticket creado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+
+    get:
+      summary: Listar tickets paginados
+      tags: [Tickets]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, example: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, example: 10 }
+      responses:
+        "200":
+          description: Lista de tickets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Ticket"
+                  totalDocs: { type: integer }
+                  totalPages: { type: integer }
+
+  /tickets/{id}:
+    get:
+      summary: Obtener ticket por ID
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Ticket encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        "404":
+          description: Ticket no encontrado
+
+    delete:
+      summary: Eliminar ticket
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Ticket eliminado
+        "404":
+          description: Ticket no encontrado
+
+  /tickets/{id}/products:
+    get:
+      summary: Obtener productos de un ticket
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Lista de productos del ticket
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TicketProduct"
+
+  /tickets/{id}/pay:
+    put:
+      summary: Marcar ticket como pagado
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Ticket actualizado como pagado
+
+  /tickets/{id}/cancel:
+    put:
+      summary: Cancelar ticket
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Ticket actualizado como cancelado
+
+  /tickets/{id}/process:
+    put:
+      summary: Marcar ticket como en proceso
+      tags: [Tickets]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Ticket actualizado como en proceso
+
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        _id: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d1 }
+        purchaser:
+          type: string
+          example: 64f1a2b3c4d5e6f7a8b9c0d2
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/TicketProduct"
+        status:
+          type: string
+          enum: [pendiente, pagado, cancelado, en proceso]
+          example: pendiente
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    TicketInput:
+      type: object
+      properties:
+        purchaser: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d2 }
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/TicketProduct"
+        status:
+          type: string
+          example: pendiente
+
+    TicketProduct:
+      type: object
+      properties:
+        productId: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d3 }
+        title: { type: string, example: "Collar GPS" }
+        price: { type: number, example: 99.99 }
+        quantity: { type: integer, example: 2 }
+        image: { type: string, example: "https://cloudinary.com/img/collar.png" }
+        description: { type: string, example: "Collar GPS para mascotas" }

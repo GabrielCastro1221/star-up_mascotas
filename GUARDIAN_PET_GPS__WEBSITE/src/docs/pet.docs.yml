@@ -1,0 +1,142 @@
+tags:
+  - name: Pets
+    description: Operaciones relacionadas con mascotas
+
+paths:
+  /api/pets:
+    post:
+      tags: [Pets]
+      summary: Registrar una nueva mascota
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetInput'
+      responses:
+        '201':
+          description: Mascota registrada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Error al registrar la mascota
+    get:
+      tags: [Pets]
+      summary: Obtener lista de mascotas
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, default: 1 }
+        - in: query
+          name: edad
+          schema: { type: integer }
+        - in: query
+          name: raza
+          schema: { type: string }
+        - in: query
+          name: especie
+          schema: { type: string }
+      responses:
+        '200':
+          description: Lista paginada de mascotas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pet'
+                  totalDocs:
+                    type: integer
+                  limit:
+                    type: integer
+                  page:
+                    type: integer
+
+  /api/pets/{id}:
+    get:
+      tags: [Pets]
+      summary: Obtener mascota por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Mascota encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: Mascota no encontrada
+    put:
+      tags: [Pets]
+      summary: Actualizar mascota por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetInput'
+      responses:
+        '200':
+          description: Mascota actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: Mascota no encontrada
+    delete:
+      tags: [Pets]
+      summary: Eliminar mascota por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Mascota eliminada
+        '404':
+          description: Mascota no encontrada
+
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        _id: { type: string }
+        nombre_mascota: { type: string }
+        especie: { type: string }
+        raza: { type: string }
+        edad: { type: integer }
+        foto: { type: string }
+        sexo: { type: string, enum: [macho, hembra] }
+        usuario: { type: string }
+        gps: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    PetInput:
+      type: object
+      required: [nombre_mascota, usuario]
+      properties:
+        nombre_mascota: { type: string }
+        especie: { type: string }
+        raza: { type: string }
+        edad: { type: integer }
+        foto: { type: string }
+        sexo: { type: string, enum: [macho, hembra] }
+        usuario: { type: string }
+        gps: { type: string }

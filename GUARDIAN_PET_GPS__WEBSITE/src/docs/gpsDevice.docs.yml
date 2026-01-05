@@ -1,0 +1,238 @@
+tags:
+  - name: GPSDevices
+    description: Operaciones relacionadas con dispositivos GPS
+
+paths:
+  /api/gpsdevices:
+    post:
+      tags: [GPSDevices]
+      summary: Registrar un nuevo dispositivo GPS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GPSDeviceInput'
+      responses:
+        '201':
+          description: Dispositivo GPS registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GPSDevice'
+        '400':
+          description: Error al registrar el dispositivo
+    get:
+      tags: [GPSDevices]
+      summary: Obtener lista de dispositivos GPS
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, default: 1 }
+        - in: query
+          name: deviceId
+          schema: { type: string }
+        - in: query
+          name: nombre
+          schema: { type: string }
+        - in: query
+          name: activo
+          schema: { type: boolean }
+        - in: query
+          name: mascota
+          schema: { type: string }
+        - in: query
+          name: estadoConexion
+          schema: { type: string, enum: [online, offline] }
+        - in: query
+          name: asignadoAUsuario
+          schema: { type: string }
+      responses:
+        '200':
+          description: Lista paginada de dispositivos GPS
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GPSDevice'
+                  totalDocs:
+                    type: integer
+                  limit:
+                    type: integer
+                  page:
+                    type: integer
+
+  /api/gpsdevices/{id}:
+    get:
+      tags: [GPSDevices]
+      summary: Obtener dispositivo GPS por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Dispositivo GPS encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GPSDevice'
+        '404':
+          description: Dispositivo GPS no encontrado
+    put:
+      tags: [GPSDevices]
+      summary: Actualizar dispositivo GPS por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GPSDeviceInput'
+      responses:
+        '200':
+          description: Dispositivo GPS actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GPSDevice'
+        '404':
+          description: Dispositivo GPS no encontrado
+    delete:
+      tags: [GPSDevices]
+      summary: Eliminar dispositivo GPS por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Dispositivo GPS eliminado
+        '404':
+          description: Dispositivo GPS no encontrado
+
+  /api/gpsdevices/{id}/status:
+    put:
+      tags: [GPSDevices]
+      summary: Cambiar estado de conexión de un dispositivo GPS
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estadoConexion:
+                  type: string
+                  enum: [online, offline]
+      responses:
+        '200':
+          description: Estado de conexión actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GPSDevice'
+        '404':
+          description: Dispositivo GPS no encontrado
+
+  /api/gpsdevices/{id}/last-location:
+    get:
+      tags: [GPSDevices]
+      summary: Obtener última ubicación de un dispositivo GPS
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Última ubicación del dispositivo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Dispositivo GPS no encontrado
+
+  /api/gpsdevices/{id}/historical-locations:
+    get:
+      tags: [GPSDevices]
+      summary: Obtener historial de ubicaciones de un dispositivo GPS
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Historial de ubicaciones del dispositivo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '404':
+          description: Dispositivo GPS no encontrado
+
+components:
+  schemas:
+    GPSDevice:
+      type: object
+      properties:
+        _id: { type: string }
+        deviceId: { type: string }
+        nombre: { type: string }
+        activo: { type: boolean }
+        mascota: { type: string }
+        ultimaUbicacion:
+          type: object
+          properties:
+            lat: { type: number }
+            lng: { type: number }
+            fecha: { type: string, format: date-time }
+        historialUbicaciones:
+          type: array
+          items:
+            type: object
+            properties:
+              lat: { type: number }
+              lng: { type: number }
+              fecha: { type: string, format: date-time }
+        estadoConexion: { type: string, enum: [online, offline] }
+        asignadoAUsuario: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    GPSDeviceInput:
+      type: object
+      required: [deviceId]
+      properties:
+        deviceId: { type: string }
+        nombre: { type: string }
+        activo: { type: boolean }
+        mascota: { type: string }
+        estadoConexion: { type: string, enum: [online, offline] }
+        asignadoAUsuario: { type: string }
+
+    Location:
+      type: object
+      properties:
+        lat: { type: number }
+        lng: { type: number }
+        fecha: { type: string, format: date-time }

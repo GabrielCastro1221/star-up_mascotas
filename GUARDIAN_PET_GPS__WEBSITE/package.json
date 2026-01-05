@@ -1,0 +1,55 @@
+{
+  "name": "guardian_pet",
+  "version": "1.0.0",
+  "description": "Guardian Pet es una plataforma IoT para el rastreo y monitoreo de mascotas en tiempo real mediante dispositivos GPS, con panel web intuitivo, gestión de usuarios y administración segura.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js --mode dev",
+    "start": "node src/app.js --mode build"
+  },
+  "keywords": [
+    "guardian pet",
+    "rastreo mascotas",
+    "gps mascotas",
+    "iot",
+    "seguimiento mascotas",
+    "monitoring pets",
+    "pet tracking",
+    "nodejs",
+    "express",
+    "mongoose",
+    "seguridad mascotas",
+    "panel web",
+    "geolocalización"
+  ],
+  "author": "Gabriel Castro Ramirez",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^1.41.3",
+    "commander": "^14.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.4",
+    "jsonwebtoken": "^9.0.3",
+    "moment": "^2.30.1",
+    "mongoose": "^9.0.2",
+    "mongoose-paginate-v2": "^1.9.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.11",
+    "socket.io": "^4.8.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^13.0.0",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
+  }
+}

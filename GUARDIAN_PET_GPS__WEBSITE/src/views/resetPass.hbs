@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/reset-password.css">
+
+<section class="change-password" id="change-password">
+    <div class="container">
+        <h2>Solicitar <span>Cambio de Contraseña</span></h2>
+        <p class="intro">Ingresa tu correo electrónico y te enviaremos un enlace para cambiar tu contraseña.</p>
+        <form action="/api/v1/auth/requestPasswordReset" method="POST" class="change-form">
+            <div class="input-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+            </div>
+            <button type="submit" class="page-btn">Solicitar cambio <i class="fi fi-rr-envelope"></i></button>
+        </form>
+        {{#if error}}
+        <p class="error-message">{{ error }}</p>
+        {{/if}}
+        <p class="login-link">¿Ya recuerdas tu contraseña? <a href="/login">Inicia sesión aquí</a></p>
+    </div>
+</section>

@@ -1,0 +1,56 @@
+.hero {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.dark-mode .hero {
+    /*background: var(--linear--1--), url(../assets/images/hero-bg-dark.png);*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.hero .flex {
+    flex-wrap: wrap-reverse;
+    min-height: calc(100vh - 101.4px);
+    padding: 2em 0;
+}
+
+.hero-content {
+    align-self: center;
+}
+
+h1 {
+    font-family: "DinaPuff", cursive;
+    font-size: clamp(40px, 5vw, 70px);
+    line-height: clamp(45px, 5vw, 75px);
+}
+
+.dark-mode h1 {
+    color: var(--cl--3--);
+}
+
+p {
+    font-size: 16px;
+    padding: 1em 0;
+}
+
+.dark-mode p {
+    color: var(--cl--2--);
+}
+
+.hero-img {
+    background-image: url(../assets/images/hero-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: -50px;
+}
+
+.hero-img img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    align-self: center;
+}

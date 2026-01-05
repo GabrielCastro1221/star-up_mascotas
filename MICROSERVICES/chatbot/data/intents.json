@@ -1,0 +1,209 @@
+{
+    "intents": [
+        {
+            "tag": "saludo",
+            "patterns": [
+                "Hola",
+                "Buenas",
+                "Qué tal",
+                "Hay alguien ahí?",
+                "Buen día",
+                "Buenas tardes",
+                "Buenas noches",
+                "Hey",
+                "Hola amigo",
+                "Hola, necesito ayuda"
+            ],
+            "responses": [
+                "¡Hola! Soy Guardian Paw, el asistente virtual de Guardian Pet.",
+                "¡Bienvenido! ¿Quieres consultar la ubicación de tu mascota o información sobre nuestros dispositivos?"
+            ]
+        },
+        {
+            "tag": "despedida",
+            "patterns": [
+                "Adiós",
+                "Nos vemos",
+                "Hasta luego",
+                "Chao",
+                "Me voy",
+                "Gracias, eso es todo",
+                "Listo, gracias"
+            ],
+            "responses": [
+                "¡Gracias por usar Guardian Paw!",
+                "¡Hasta pronto! Tu mascota siempre estara protegida con Guardian Pet."
+            ]
+        },
+        {
+            "tag": "ubicacion_mascota",
+            "patterns": [
+                "Dónde está mi mascota?",
+                "Ubicación actual",
+                "Muéstrame el mapa",
+                "Dónde se encuentra ahora?",
+                "Quiero ver la ruta",
+                "Rastreo en tiempo real"
+            ],
+            "responses": [
+                "Tu mascota está siendo rastreada en tiempo real. Abre la app Guardian Pet para ver el mapa actualizado.",
+                "La ubicación se actualiza cada pocos segundos. ¿Quieres que te envíe el último punto registrado?"
+            ]
+        },
+        {
+            "tag": "bateria_dispositivo",
+            "patterns": [
+                "Cuánta batería le queda?",
+                "Estado de batería",
+                "Nivel de carga",
+                "Necesita cargarse?",
+                "Cuánto dura la batería?"
+            ],
+            "responses": [
+                "El dispositivo tiene autonomía de hasta 72 horas. Puedes revisar el nivel en la app.",
+                "Te recomiendo cargarlo si baja del 20%."
+            ]
+        },
+        {
+            "tag": "configuracion_dispositivo",
+            "patterns": [
+                "Cómo configuro el GPS?",
+                "Instalación del collar",
+                "Cómo lo activo?",
+                "Configurar dispositivo",
+                "Primer uso"
+            ],
+            "responses": [
+                "Para configurar el GPS, enciéndelo y vincúlalo desde la app Guardian Pet.",
+                "Coloca el collar en tu mascota y asegúrate de que el dispositivo esté cargado y conectado."
+            ]
+        },
+        {
+            "tag": "alertas",
+            "patterns": [
+                "Qué alertas puedo recibir?",
+                "Me avisa si se escapa?",
+                "Notificaciones disponibles",
+                "Alertas de seguridad",
+                "Me avisa si sale de casa?"
+            ],
+            "responses": [
+                "Guardian Paw te envía alertas si tu mascota sale de la zona segura definida.",
+                "Recibirás notificaciones de batería baja, desconexión y movimientos inusuales."
+            ]
+        },
+        {
+            "tag": "soporte",
+            "patterns": [
+                "Necesito ayuda",
+                "No me funciona",
+                "Tengo un problema",
+                "El GPS no conecta",
+                "No veo la ubicación",
+                "El dispositivo no prende"
+            ],
+            "responses": [
+                "Nuestro equipo de soporte está listo para ayudarte. ¿Puedes darme el número de serie del dispositivo?",
+                "Si el GPS no conecta, revisa que tenga batería y esté en un área con señal."
+            ]
+        },
+        {
+            "tag": "precio",
+            "patterns": [
+                "Cuánto cuesta?",
+                "Precio del dispositivo",
+                "Cuánto vale el collar?",
+                "Planes disponibles",
+                "Cuánto cuesta la suscripción?"
+            ],
+            "responses": [
+                "El dispositivo tiene un costo inicial y ofrecemos planes mensuales de rastreo desde $XX.XXX.",
+                "Puedes elegir entre plan básico, estándar o premium según tus necesidades."
+            ]
+        },
+        {
+            "tag": "envio",
+            "patterns": [
+                "Hacen envíos?",
+                "Cuánto tarda en llegar?",
+                "Envían a mi ciudad?",
+                "Tienen entrega a domicilio?"
+            ],
+            "responses": [
+                "Realizamos envíos a todo el país. El tiempo de entrega depende de tu ciudad.",
+                "En compras superiores a $XXX.XXX el envío es GRATIS."
+            ]
+        },
+        {
+            "tag": "formas_pago",
+            "patterns": [
+                "Qué métodos de pago aceptan?",
+                "Puedo pagar con tarjeta?",
+                "Tienen contraentrega?",
+                "Aceptan Nequi?",
+                "Reciben Daviplata?"
+            ],
+            "responses": [
+                "Aceptamos tarjeta, PSE, Nequi, Daviplata y contraentrega en algunas ciudades.",
+                "También puedes pagar en efectivo si eliges recoger en tienda."
+            ]
+        },
+        {
+            "tag": "agradecimiento",
+            "patterns": [
+                "Gracias",
+                "Muy amable",
+                "Perfecto, gracias",
+                "Mil gracias",
+                "Genial, gracias"
+            ],
+            "responses": [
+                "¡Con gusto!",
+                "¡Gracias a ti por confiar en Guardian Pet y en Guardian Paw!"
+            ]
+        },
+        {
+            "tag": "contacto",
+            "patterns": [
+                "Tienen WhatsApp?",
+                "Cómo los contacto?",
+                "Tienen número de teléfono?",
+                "Atención al cliente",
+                "Soporte técnico"
+            ],
+            "responses": [
+                "Puedes escribirnos por WhatsApp al 300 XXX XXXX o por Instagram @GuardianPet.",
+                "También puedes usar el formulario de contacto en nuestra web oficial."
+            ]
+        },
+        {
+            "tag": "caracteristicas",
+            "patterns": [
+                "Es resistente al agua?",
+                "Funciona en cualquier ciudad?",
+                "Qué cobertura tiene?",
+                "Sirve para gatos?",
+                "Sirve para perros grandes?",
+                "Sirve para perros pequeños?"
+            ],
+            "responses": [
+                "El dispositivo es resistente al agua y funciona en cualquier ciudad con cobertura GSM.",
+                "Guardian Pet es compatible con perros y gatos de distintos tamaños gracias a sus collares ajustables."
+            ]
+        },
+        {
+            "tag": "horarios",
+            "patterns": [
+                "Cuál es el horario?",
+                "A qué hora abren?",
+                "Están abiertos hoy?",
+                "Puedo ir el sábado?",
+                "Horario de atención"
+            ],
+            "responses": [
+                "Nuestro horario de atención es de lunes a sábado de 10am a 6pm.",
+                "Domingos estamos cerrados, pero Guardian Paw siempre está disponible en línea."
+            ]
+        }
+    ]
+}

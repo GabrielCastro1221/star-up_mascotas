@@ -1,0 +1,193 @@
+tags:
+  - name: Users
+    description: Operaciones relacionadas con usuarios
+
+paths:
+  /api/users:
+    post:
+      tags: [Users]
+      summary: Crear un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: El usuario ya está registrado
+    get:
+      tags: [Users]
+      summary: Obtener lista de usuarios
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, default: 1 }
+        - in: query
+          name: rol
+          schema: { type: string, enum: [admin, user] }
+        - in: query
+          name: genero
+          schema: { type: string, enum: [masculino, femenino, otro] }
+      responses:
+        '200':
+          description: Lista paginada de usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  totalDocs:
+                    type: integer
+                  limit:
+                    type: integer
+                  page:
+                    type: integer
+
+  /api/users/{id}:
+    get:
+      tags: [Users]
+      summary: Obtener usuario por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+    put:
+      tags: [Users]
+      summary: Actualizar usuario por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '200':
+          description: Usuario actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+    delete:
+      tags: [Users]
+      summary: Eliminar usuario por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Usuario eliminado
+        '404':
+          description: Usuario no encontrado
+
+  /api/users/{id}/role:
+    put:
+      tags: [Users]
+      summary: Cambiar rol de un usuario
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rol:
+                  type: string
+                  enum: [admin, user]
+      responses:
+        '200':
+          description: Rol actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+
+  /api/users/{id}/profile:
+    get:
+      tags: [Users]
+      summary: Obtener perfil de usuario
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Perfil del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id: { type: string }
+        nombre: { type: string }
+        email: { type: string }
+        foto: { type: string }
+        rol: { type: string, enum: [admin, user] }
+        telefono: { type: string }
+        direccion: { type: string }
+        ciudad: { type: string }
+        genero: { type: string, enum: [masculino, femenino, otro] }
+        edad: { type: integer }
+        mascotas:
+          type: array
+          items: { type: string }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    UserInput:
+      type: object
+      required: [nombre, email, password]
+      properties:
+        nombre: { type: string }
+        email: { type: string }
+        password: { type: string }
+        foto: { type: string }
+        rol: { type: string, enum: [admin, user] }
+        telefono: { type: string }
+        direccion: { type: string }
+        ciudad: { type: string }
+        genero: { type: string, enum: [masculino, femenino, otro] }
+        edad: { type: integer }

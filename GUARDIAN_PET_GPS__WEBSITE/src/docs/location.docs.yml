@@ -1,0 +1,124 @@
+tags:
+  - name: Locations
+    description: Operaciones relacionadas con ubicaciones GPS
+
+paths:
+  /api/locations:
+    post:
+      tags: [Locations]
+      summary: Registrar una nueva ubicación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationInput'
+      responses:
+        '201':
+          description: Ubicación registrada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Error al registrar la ubicación
+    get:
+      tags: [Locations]
+      summary: Obtener lista de ubicaciones
+      parameters:
+        - in: query
+          name: gpsDevice
+          schema: { type: string }
+        - in: query
+          name: startDate
+          schema: { type: string, format: date-time }
+        - in: query
+          name: endDate
+          schema: { type: string, format: date-time }
+      responses:
+        '200':
+          description: Lista de ubicaciones filtradas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+
+  /api/locations/{id}:
+    get:
+      tags: [Locations]
+      summary: Obtener ubicación por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Ubicación encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Ubicación no encontrada
+    put:
+      tags: [Locations]
+      summary: Actualizar ubicación por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationInput'
+      responses:
+        '200':
+          description: Ubicación actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Ubicación no encontrada
+    delete:
+      tags: [Locations]
+      summary: Eliminar ubicación por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Ubicación eliminada
+        '404':
+          description: Ubicación no encontrada
+
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        _id: { type: string }
+        gpsDevice: { type: string }
+        lat: { type: number }
+        lng: { type: number }
+        velocidad: { type: number }
+        precision: { type: number }
+        fecha: { type: string, format: date-time }
+    LocationInput:
+      type: object
+      required: [gpsDevice, lat, lng]
+      properties:
+        gpsDevice: { type: string }
+        lat: { type: number }
+        lng: { type: number }
+        velocidad: { type: number }
+        precision: { type: number }
+        fecha: { type: string, format: date-time }

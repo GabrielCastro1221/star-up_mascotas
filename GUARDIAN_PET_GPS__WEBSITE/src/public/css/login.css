@@ -1,0 +1,87 @@
+.login {
+    padding: 6em 0;
+    margin-top: -50px;
+    background: var(--cl--5--);
+}
+
+.login h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.login h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.login .intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3em;
+    color: var(--cl--2--);
+    font-size: 1rem;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--bg--1--);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5em;
+}
+
+.input-group label {
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    color: var(--cl--2--);
+}
+
+.input-group input {
+    padding: 0.8em 1em;
+    border: 2px solid var(--cl--3--);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--cl--4--);
+}
+
+.login-form button {
+    margin-top: 1em;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    padding: 0.8em 1.5em;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.register-link,
+.forgot-link {
+    text-align: center;
+    margin-top: 1em;
+    color: var(--cl--2--);
+}
+
+.register-link a,
+.forgot-link a {
+    color: var(--cl--3--);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+

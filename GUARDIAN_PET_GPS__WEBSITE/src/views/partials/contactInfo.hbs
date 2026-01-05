@@ -1,0 +1,17 @@
+<div class="contact-info">
+    <h3>Información de Guardian Pet</h3>
+    {{#each CompanyInfo}}
+    <p style="color: #121212; font-weight: 600;"><i style="color: #3a8da8; font-weight: 700;"
+            class="fi fi-rr-phone-call"></i> {{phone}}</p>
+    <p style="color: #121212; font-weight: 600;"><i style="color: #3a8da8; font-weight: 700;"
+            class="fi fi-rr-envelope"></i> {{email}}</p>
+    <p style="color: #121212; font-weight: 600;"><i style="color: #3a8da8; font-weight: 700;"
+            class="fi fi-rr-marker"></i> {{address}}</p>
+    {{/each}}
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31793.984171383567!2d-75.51989130000001!3d5.0635008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sco!4v1766905287576!5m2!1ses-419!2sco"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>

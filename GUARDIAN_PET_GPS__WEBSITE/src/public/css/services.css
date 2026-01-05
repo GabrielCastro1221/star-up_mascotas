@@ -1,0 +1,119 @@
+.service {
+    padding: 6em 0;
+    background: var(--cl--5--);
+    position: relative;
+}
+
+.service h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2em;
+    color: var(--cl--2--);
+    font-weight: 600;
+}
+
+.service h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5em;
+    margin-bottom: 4em;
+}
+
+.s-card {
+    background-color: var(--bg--1--);
+    border-radius: 16px;
+    box-shadow: var(--shadow--);
+    padding: 2em 1.5em;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.s-card:hover {
+    transform: translateY(-6px);
+}
+
+.s-card img {
+    width: 64px;
+    height: auto;
+    margin-bottom: 1em;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.s-card h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--cl--3--);
+    font-weight: 700;
+    font-family: "DynaPuff", cursive;
+    margin-top: 30px;
+}
+
+.service-img {
+    justify-content: center;
+    margin-bottom: 3em;
+    position: relative;
+}
+
+.service-img img {
+    width: 100%;
+    max-width: 360px;
+    height: 480px;
+    border-radius: 12px;
+
+    object-fit: fill;
+    margin: 0 auto;
+}
+
+.play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.play img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 0 12px rgba(58, 141, 168, 0.8));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.play:hover img {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(255, 229, 94, 0.9));
+}
+
+.service-content {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.service-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1em;
+    color: var(--cl--2--);
+}
+
+.service-content h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+}
+
+.service-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--cl--2--);
+    margin-bottom: 2em;
+}

@@ -1,0 +1,78 @@
+paths:
+  /categories:
+    post:
+      summary: Crear categoría
+      tags: [Categories]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryInput"
+      responses:
+        "200":
+          description: Categoría creada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          description: La categoría ya existe
+        "500":
+          description: Error interno del servidor
+
+    get:
+      summary: Listar todas las categorías
+      tags: [Categories]
+      responses:
+        "200":
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+        "500":
+          description: Error interno del servidor
+
+  /categories/{id}:
+    delete:
+      summary: Eliminar categoría por ID
+      tags: [Categories]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Categoría eliminada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Categoría eliminada correctamente
+        "404":
+          description: Categoría no encontrada
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        _id: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d1 }
+        category: { type: string, example: "Accesorios" }
+        description: { type: string, example: "Productos relacionados con accesorios para mascotas" }
+
+    CategoryInput:
+      type: object
+      required: [category]
+      properties:
+        category: { type: string, example: "Accesorios" }
+        description: { type: string, example: "Productos relacionados con accesorios para mascotas" }

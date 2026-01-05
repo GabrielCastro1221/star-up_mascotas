@@ -1,0 +1,53 @@
+.about {
+    flex-wrap: wrap-reverse;
+    padding: 6em 0;
+    align-items: center;
+    gap: 4em;
+}
+
+.about-content {
+    flex: 1 1 400px;
+    padding: 1em;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.about-content h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.about-content h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--cl--2--);
+    margin-bottom: 1em;
+}
+
+.about-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--cl--2--);
+    margin-bottom: 1.5em;
+}
+
+.about-img {
+    flex: 1 1 400px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.about-img img {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+}

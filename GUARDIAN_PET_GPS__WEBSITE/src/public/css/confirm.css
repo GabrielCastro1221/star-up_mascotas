@@ -1,0 +1,35 @@
+.confirm {
+    padding: 6em 0;
+    background: var(--cl--5--);
+    text-align: center;
+}
+
+.confirm h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.confirm h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.confirm .intro {
+    max-width: 600px;
+    margin: 0 auto 2em;
+    color: var(--cl--2--);
+    font-size: 1.1rem;
+}
+
+.confirm-icon {
+    font-size: 4rem;
+    color: var(--cl--3--);
+    margin: 1em 0;
+}
+
+.confirm-actions {
+    margin-top: 2em;
+}

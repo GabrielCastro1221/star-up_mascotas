@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/css/hero.css">
+
+<section class="hero">
+    <div class="row flex container">
+        {{#each pageInfo}}
+        <div class="hero-content">
+            <h1>{{hero_title}}</h1>
+            <p>{{hero_subtitle}}</p>
+            <a href="#" class="page-btn">
+                Mas información
+            </a>
+        </div>
+        {{/each}}
+        <div class="hero-img row">
+            <img src="/assets/images/hero.png" alt="Guardian Pet Logo">
+        </div>
+    </div>
+</section>

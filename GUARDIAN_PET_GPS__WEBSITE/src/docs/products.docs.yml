@@ -1,0 +1,262 @@
+paths:
+  /products:
+    post:
+      summary: Crear producto
+      tags: [Products]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "200":
+          description: Producto creado con éxito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Producto creado con éxito
+                  product:
+                    $ref: "#/components/schemas/Product"
+
+    get:
+      summary: Listar productos paginados
+      tags: [Products]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, example: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, example: 6 }
+        - in: query
+          name: sort
+          schema: { type: string, enum: [asc, desc], example: asc }
+        - in: query
+          name: query
+          schema: { type: string, example: "ropa" }
+      responses:
+        "200":
+          description: Lista de productos paginados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productos:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+                  categorias:
+                    type: array
+                    items: { type: string }
+                  pagination:
+                    type: object
+
+  /products/{id}:
+    get:
+      summary: Obtener producto por ID
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Producto no encontrado
+
+    put:
+      summary: Actualizar producto
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "200":
+          description: Producto actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+    delete:
+      summary: Eliminar producto
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Producto eliminado
+        "404":
+          description: Producto no encontrado
+
+  /products/{id}/feature:
+    put:
+      summary: Marcar producto como destacado
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Producto actualizado como destacado
+
+  /products/{id}/new-arrive:
+    put:
+      summary: Marcar producto como nuevo arribo
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Producto actualizado como nuevo arribo
+
+  /products/{id}/best-seller:
+    put:
+      summary: Marcar producto como más vendido
+      tags: [Products]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Producto actualizado como más vendido
+
+  /products/featured:
+    get:
+      summary: Obtener productos destacados
+      tags: [Products]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: Lista de productos destacados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+
+  /products/new-arrive:
+    get:
+      summary: Obtener nuevos arribos
+      tags: [Products]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: Lista de nuevos arribos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+
+  /products/best-seller:
+    get:
+      summary: Obtener productos más vendidos
+      tags: [Products]
+      responses:
+        "200":
+          description: Lista de productos más vendidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+  /products/search:
+    get:
+      summary: Buscar productos
+      tags: [Products]
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema: { type: string, example: "camisa" }
+      responses:
+        "200":
+          description: Lista de productos encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id: { type: string, example: 64f1a2b3c4d5e6f7a8b9c0d1 }
+        title: { type: string, example: "Camisa deportiva" }
+        price: { type: number, example: 59.99 }
+        description: { type: string, example: "Camisa ligera y transpirable" }
+        stock: { type: integer, example: 100 }
+        category: { type: string, example: "Ropa" }
+        brand: { type: string, example: "Nike" }
+        image: { type: string, example: "https://cloudinary.com/img/camisa.png" }
+        thumbnail:
+          type: array
+          items: { type: string }
+        type_product:
+          type: string
+          enum: [destacado, nuevo arribo, mas vendido, null]
+
+    ProductInput:
+      type: object
+      required: [title, price, description, stock, category, brand]
+      properties:
+        title: { type: string }
+        price: { type: number }
+        description: { type: string }
+        stock: { type: integer }
+        category: { type: string }
+        brand: { type: string }
+        image: { type: string }
+        thumbnails:
+          type: array
+          items: { type: string }

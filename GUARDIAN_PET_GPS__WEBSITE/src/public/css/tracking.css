@@ -1,0 +1,93 @@
+.tracking {
+    padding: 6em 0;
+    margin-top: -60px;
+    background: var(--cl--5--);
+}
+
+.tracking h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.tracking h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.tracking .intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3em;
+    color: var(--cl--2--);
+    font-size: 1rem;
+}
+
+.filter {
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 3em;
+    flex-wrap: wrap;
+}
+
+.filter input {
+    padding: 0.8em 1em;
+    border: 2px solid var(--cl--3--);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 300px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.filter input:focus {
+    border-color: var(--cl--4--);
+}
+
+.tracking-results {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2em;
+}
+
+.tracking-card {
+    background: var(--bg--1--);
+    padding: 1.5em;
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.tracking-card:hover {
+    transform: translateY(-6px);
+}
+
+.tracking-card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1em;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.tracking-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.tracking-card p {
+    font-size: 0.95rem;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.tracking-card span {
+    font-weight: 600;
+    color: var(--cl--3--);
+}

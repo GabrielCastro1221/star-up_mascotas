@@ -1,0 +1,86 @@
+.suscribe {
+    background: var(--cl--5--);
+    padding: 6em 0;
+    margin-top: 2em;
+    position: relative;
+}
+
+.suscribe-content {
+    align-items: center;
+    justify-content: center;
+}
+
+.suscribe-content div {
+    flex-grow: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.suscribe-content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.suscribe-content h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+i {
+    color: var(--cl--3--);
+}
+
+form {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    background: var(--cl--1--);
+    padding: 1.5em 2em;
+    margin-top: 2em;
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+}
+
+form>* {
+    flex: 1 1 15em;
+}
+
+.input {
+    align-items: center;
+    gap: 0.8em;
+    border: 2px solid var(--cl--3--);
+    border-radius: 8px;
+    padding: 0.6em 1em;
+    transition: border-color 0.3s ease;
+}
+
+.input input {
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: var(--cl--2--);
+}
+
+::placeholder {
+    color: var(--cl--3--);
+    font-weight: 400;
+}
+
+form .page-btn {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    padding: 0.8em 1.5em;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0 auto;
+}

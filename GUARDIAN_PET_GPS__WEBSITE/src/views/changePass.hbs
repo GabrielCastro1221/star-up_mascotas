@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/change-password.css">
+
+<section class="reset-password">
+    <div class="container">
+        <h2 class="section__title">
+            Restablecer <span>Contraseña</span>
+        </h2>
+        <p class="intro">Ingresa tu correo, el código de confirmación y tu nueva contraseña para restablecer el acceso.
+        </p>
+
+        <form action="/api/v1/auth/reset-password" method="POST" class="reset-form">
+            <div class="input-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Ingrese su Email" required>
+            </div>
+            <div class="input-group">
+                <label for="token">Código de confirmación</label>
+                <input type="text" id="token" name="token" placeholder="Ingrese el código de confirmación" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Nueva contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingrese la nueva contraseña" required>
+            </div>
+            <button type="submit" class="page-btn">Guardar <i class="fi fi-rr-lock"></i></button>
+        </form>
+
+        {{#if error}}
+        <p class="error-message">{{ error }}</p>
+        {{/if}}
+    </div>
+</section>

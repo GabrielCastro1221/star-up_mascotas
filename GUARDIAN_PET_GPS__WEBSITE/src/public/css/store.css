@@ -1,0 +1,48 @@
+.filters {
+    justify-content: center;
+    gap: 1em;
+    margin-top: -40px;
+    margin-bottom: 3em;
+    flex-wrap: wrap;
+}
+
+.filters select,
+.filters input {
+    padding: 0.8em 1em;
+    border: 2px solid var(--cl--3--);
+    border-radius: 8px;
+    background: var(--cl--1--);
+    color: var(--cl--2--);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.filters select:focus,
+.filters input:focus {
+    border-color: var(--cl--4--);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    gap: 0.5em;
+}
+
+.pagination .page-btn {
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    transition: all 0.3s ease;
+}
+
+.pagination .page-btn:hover {
+    color: var(--cl--2--);
+}
+
+.pagination .active {
+    color: var(--cl--2--);
+    font-weight: 600;
+}

@@ -1,0 +1,186 @@
+paths:
+  /auth/register:
+    post:
+      summary: Registro de usuario
+      description: Crea un nuevo usuario en la plataforma y envía un correo de bienvenida.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Gabriel
+                email:
+                  type: string
+                  format: email
+                  example: usuario@correo.com
+                password:
+                  type: string
+                  format: password
+                  example: "123456"
+                telefono:
+                  type: string
+                  example: "3001234567"
+                direccion:
+                  type: string
+                  example: "Calle 123 #45-67"
+      responses:
+        "200":
+          description: Usuario registrado con éxito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuario registrado con exito
+                  usuario:
+                    $ref: "#/components/schemas/User"
+        "500":
+          description: Error interno del servidor
+
+  /auth/login:
+    post:
+      summary: Inicio de sesión
+      description: Autentica al usuario y devuelve un token JWT.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: usuario@correo.com
+                password:
+                  type: string
+                  format: password
+                  example: "123456"
+      responses:
+        "200":
+          description: Inicio de sesión exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Inicio de sesión exitoso
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 64f1a2b3c4d5e6f7a8b9c0d1
+                      nombre:
+                        type: string
+                        example: Gabriel
+                      email:
+                        type: string
+                        example: usuario@correo.com
+                      rol:
+                        type: string
+                        example: user
+                      token:
+                        type: string
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        "400":
+          description: Credenciales incorrectas
+        "404":
+          description: Usuario no encontrado
+        "500":
+          description: Error interno del servidor
+
+  /auth/request-password-reset:
+    post:
+      summary: Solicitud de restablecimiento de contraseña
+      description: Genera un token de recuperación y envía un correo al usuario.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: usuario@correo.com
+      responses:
+        "302":
+          description: Redirección a confirmación
+        "404":
+          description: Usuario no encontrado
+        "500":
+          description: Error interno del servidor
+
+  /auth/reset-password:
+    post:
+      summary: Restablecer contraseña
+      description: Permite al usuario cambiar su contraseña usando un token válido.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: usuario@correo.com
+                password:
+                  type: string
+                  format: password
+                  example: "nuevaPassword123"
+                token:
+                  type: string
+                  example: abc123token
+      responses:
+        "302":
+          description: Redirección al inicio
+        "400":
+          description: Token inválido o contraseña igual a la anterior
+        "404":
+          description: Usuario no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 64f1a2b3c4d5e6f7a8b9c0d1
+        nombre:
+          type: string
+          example: Gabriel
+        email:
+          type: string
+          example: usuario@correo.com
+        rol:
+          type: string
+          example: user
+        telefono:
+          type: string
+          example: "3001234567"
+        direccion:
+          type: string
+          example: "Calle 123 #45-67"
