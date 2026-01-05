@@ -14,6 +14,7 @@ const UserSchema = new Schema({
     genero: { type: String, enum: ["masculino", "femenino", "otro"] },
     edad: { type: Number },
     mascotas: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
+    tickets: [{ type: Schema.Types.ObjectId, ref: "Ticket" }],
     token_reset: { token: String, expire: Date },
 },
     {

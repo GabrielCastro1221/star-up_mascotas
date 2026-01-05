@@ -6,7 +6,7 @@ class AuthMiddleware {
     authenticate = async (req, res, next) => {
         const token = req.cookies.token;
         if (!token) {
-            return res.redirect("/acceso-denegado");
+            return res.redirect("/access-denied");
         }
 
         try {
@@ -41,7 +41,7 @@ class AuthMiddleware {
                 return res.redirect("/page-not-found");
             }
             if (!roles.includes(req.user.rol)) {
-                return res.redirect("/acceso-denegado");
+                return res.redirect("/access-denied");
             }
             next();
         };

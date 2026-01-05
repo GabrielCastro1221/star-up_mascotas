@@ -95,6 +95,16 @@ class UserController {
             });
         }
     }
+
+    async getUserPets(req, res) {
+        try {
+            const { userId } = req.params;
+            const pets = await UserRepository.getUserPets(userId);
+            res.status(200).json({ message: "Mascotas obtenidas con éxito", mascotas: pets });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = new UserController();

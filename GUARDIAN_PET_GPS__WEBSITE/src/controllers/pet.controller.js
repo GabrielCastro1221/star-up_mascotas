@@ -1,16 +1,16 @@
 const PetRepository = require("../repositories/pet.repository");
-const MailerController = require("../services/mailer/nodemailer.services");
+const UserModel = require("../models/user.model");
 
 class PetController {
     async createPet(req, res) {
         try {
             const petData = req.body;
-            await PetRepository.createPet(petData);
-            await MailerController.petRegistered(petData);
-            res.status(200).json({
-                message: "Mascota registrada con exito",
-                mascota: petData
-            });
+            if (req.file && req.file.path) { petData.foto = req.file.path; }
+            const newPet = await PetRepository.createPet(petData);
+            await UserModel.findByIdAndUpdate(petData.usuario,
+                { $push: { mascotas: newPet._id } },
+                { new: true });
+            res.status(200).json({ message: "Mascota registrada con éxito", mascota: newPet });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

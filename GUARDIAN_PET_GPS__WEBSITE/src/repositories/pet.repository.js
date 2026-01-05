@@ -3,9 +3,7 @@ const petModel = require("../models/pet.model");
 class PetRepository {
     async createPet(petData) {
         try {
-            const newPet = new petModel({
-                ...petData,
-            });
+            const newPet = new petModel({ ...petData });
             await newPet.save();
             return newPet;
         } catch (error) {

@@ -93,7 +93,7 @@ class ViewController {
         }
     };
 
-    renderProfileUser = (req, res) => {
+    renderProfileUser =  (req, res) => {
         try {
             res.render("profileUser");
         } catch (error) {

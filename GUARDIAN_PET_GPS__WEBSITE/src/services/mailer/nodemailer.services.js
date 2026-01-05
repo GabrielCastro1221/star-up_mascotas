@@ -151,7 +151,6 @@ class MailerController {
             logger.error("Error al enviar correo de recuperación:", error);
         }
     }
-
 }
 
 module.exports = new MailerController();

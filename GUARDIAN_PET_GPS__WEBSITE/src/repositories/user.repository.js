@@ -96,6 +96,18 @@ class UserRepository {
             throw new Error(error.message);
         }
     }
+
+    async getUserPets(userId) {
+        try {
+            const user = await userModel.findById(userId).populate("mascotas");
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+            return user.mascotas;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
 }
 
 module.exports = new UserRepository();

@@ -12,6 +12,7 @@ router.get(
     auth.restrict(["user", "admin"]),
     UserController.getUserProfile
 );
+router.get("/:userId/pets", UserController.getUserPets);
 router.put(
     "/update/:id",
     upload.single("foto"),

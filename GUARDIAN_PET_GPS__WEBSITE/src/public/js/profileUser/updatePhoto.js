@@ -1,27 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".login-form");
+    const updatePhotoBtn = document.getElementById("update-photo");
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.name = "foto";
+    fileInput.accept = "image/*";
+    fileInput.style.display = "none";
+    document.body.appendChild(fileInput);
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?._id;
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const userData = {
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value
-        };
+    if (!token || !userId) {
+        return;
+    }
+    updatePhotoBtn.addEventListener("click", () => {
+        fileInput.click();
+    });
+    fileInput.addEventListener("change", async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append("foto", file);
         try {
-            const response = await fetch("/api/v1/auth/login", {
-                method: "POST",
+            const response = await fetch(`/api/v1/users/update/${userId}`, {
+                method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify(userData),
-                credentials: "include"
+                body: formData
             });
             const result = await response.json();
-            if (response.ok) {
-                localStorage.setItem("user", JSON.stringify(result.data));
-                localStorage.setItem("token", result.data.token);
+            if (response.ok && result.user?.foto) {
+                document.getElementById("user-photo").src = result.user.foto;
                 Toastify({
-                    text: "Inicio de sesión exitoso",
+                    text: "Foto actualizada correctamente",
                     duration: 3000,
                     gravity: "top",
                     position: "right",
@@ -31,13 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         borderRadius: "8px"
                     }
                 }).showToast();
-                form.reset();
-                setTimeout(() => {
-                    window.location.href = "/perfil-usuario";
-                }, 3000);
             } else {
                 Toastify({
-                    text: result.message || "Credenciales incorrectas",
+                    text: result.message || "Error al actualizar la foto",
                     duration: 3000,
                     gravity: "top",
                     position: "right",

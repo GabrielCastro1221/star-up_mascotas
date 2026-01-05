@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/css/profileUser/registerPet.css">
+
+<section class="pet" id="pet-user">
+    <div class="container">
+        <h2>Registrar Mi<span> Mascota</span></h2>
+        <form action="#" class="pet-form">
+            <div class="input-group">
+                <label for="nombre_mascota">Nombre</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota"
+                    placeholder="Ingrese el nombre de su mascota" required>
+            </div>
+            <div class="input-group">
+                <label for="especie">Especie</label>
+                <input type="text" id="especie" name="especie" placeholder="Ingrese la especie de su mascota" required>
+            </div>
+            <div class="input-group">
+                <label for="raza">Raza</label>
+                <input type="text" id="raza" name="raza" placeholder="Ingrese la raza de su mascota" required>
+            </div>
+            <div class="input-group">
+                <label for="edad_m">Edad</label>
+                <input type="text" id="edad_m" name="edad" placeholder="Ingrese la edad de su mascota" required>
+            </div>
+            <div class="input-group" style="display: none;">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" name="usuario" required readonly>
+            </div>
+            <div class="input-group">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="macho">Macho</option>
+                    <option value="hembra">Hembra</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Foto de la mascota</label>
+                <input type="file" id="foto_m" name="foto" accept="image/*" style="display:none;">
+                <label for="foto_m" class="upload-btn">Subir foto</label>
+                <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
+            </div>
+            <button type="submit" class="page-btn">Registrar Mascota <i class="fi fi-rr-user-add"></i></button>
+        </form>
+    </div>
+</section>
+
+<script src="/js/profileUser/createPet.js"></script>

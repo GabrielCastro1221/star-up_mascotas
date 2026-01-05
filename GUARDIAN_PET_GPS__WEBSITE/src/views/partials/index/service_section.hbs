@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/index/services.css">
+
+<section class="service" id="service">
+    {{#each pageInfo}}
+    <div class="container">
+        <h2><span>Nuestros</span> Servicios</h2>
+        <div class="service-cards column">
+            <div class="s-card">
+                <img src="/assets/images/service1.png" alt="GPS para mascotas">
+                <h3>{{service_1}}</h3>
+                <p>{{service_1_desc}}</p>
+            </div>
+            <div class="s-card">
+                <img src="/assets/images/service2.png" alt="Dispositivo GPS Guardian Pet">
+                <h3>{{service_2}}</h3>
+                <p>{{service_2_desc}}</p>
+            </div>
+            <div class="s-card">
+                <img src="/assets/images/service3.png" alt="Aplicación móvil Guardian Pet">
+                <h3 style="margin-top: 5px;">{{service_3}}</h3>
+                <p>{{service_3_desc}}</p>
+            </div>
+            <div class="s-card">
+                <img src="/assets/images/service4.png" alt="Geocercas inteligentes">
+                <h3>{{service_4}}</h3>
+                <p>{{service_4_desc}}</p>
+            </div>
+        </div>
+        <div class="flex row">
+            <div class="service-img row">
+                <img src="/assets/images/service6.png" alt="">
+                <a href="" class="play row">
+                    <img src="/assets/images/play-button.png" alt="">
+                </a>
+            </div>
+            <div class="service-content">
+                <h2>¿Por qué elegir <span>Guardian Pet</span>?</h2>
+                <p>{{service_text}}</p>
+                <a href="#" class="page-btn">Más Información</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</section>
