@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/store/testimonial.css">
+
+<section class="testimonials">
+    <div class="container-testimonial">
+        <div class="section-header">
+            <h2 class="title">Reseñas de nuestros <span>Usuarios</span></h2>
+        </div>
+        {{#if reviews.length}}
+        <div class="testimonial-content">
+            <div class="swiper testimonial-slider js-testimonials-slider">
+                <div class="swiper-wrapper">
+                    {{#each reviews}}
+                    <div class="swiper-slide testimonials-items">
+                        <div class="info">
+                            <div class="text-box">
+                                <h3 class="name">{{this.user.nombre}}</h3>
+                                <div class="user-info">
+                                    <span class="email">{{this.user.email}}</span>
+                                    <span class="date">{{formatDate this.createdAt}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>{{this.reviewText}}</p>
+                        <div class="rating">
+                            {{#times this.rating}}
+                            <i class="fi fi-ss-star"></i>
+                            {{/times}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="no-reviews-message">
+            <p class="no-reviews-text">
+                <i class="fi fi-rr-info icon"></i>
+                Este producto aún no tiene reseñas registradas.
+            </p>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<script src="/js/store/testimonial.js"></script>

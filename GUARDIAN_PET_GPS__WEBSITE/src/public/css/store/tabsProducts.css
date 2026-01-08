@@ -1,0 +1,99 @@
+.tabs-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    margin-bottom: 1.5em;
+}
+
+.tab-btn {
+    padding: 0.8em 1.5em;
+    border: none;
+    border-radius: 8px;
+    background: var(--cl--1--);
+    color: var(--cl--3--);
+    border: 1px solid var(--cl--3--);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.tab-btn.active {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-features {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 1.5em;
+    border-radius: 12px;
+    background: var(--cl--1--);
+    box-shadow: var(--shadow--);
+}
+
+.features-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cl--2--);
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.features-title span {
+    font-family: "DynaPuff", cursive;
+    color: var(--cl--3--);
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 1rem;
+    color: var(--cl--2--);
+    padding: 0.6em 1em;
+    border-radius: 8px;
+    background: var(--cl--1--);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.feature-item .icon {
+    color: var(--cl--3--);
+    font-size: 1.2rem;
+}
+

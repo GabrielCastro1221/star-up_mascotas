@@ -1,3 +1,11 @@
+.title-store {
+    margin-top: -60px;
+}
+
+.title-store span {
+    font-family: " DynaPuff", cursive;
+}
+
 .filters {
     justify-content: center;
     gap: 1em;
@@ -45,4 +53,70 @@
 .pagination .active {
     color: var(--cl--2--);
     font-weight: 600;
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.p-card {
+    background: var(--cl--1--);
+    border: 1px solid var(--cl--3--);
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.p-card:hover {
+    transform: translateY(-5px);
+}
+
+.p-card .img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--cl--3--);
+}
+
+.p-content {
+    padding: 1em;
+    text-align: center;
+}
+
+.p-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+}
+
+.p-content p {
+    font-size: 0.95rem;
+    color: var(--cl--2--);
+    margin-bottom: 0.8em;
+}
+
+.p-content .page-btn {
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.p-content .page-btn:hover {
+    background: var(--cl--4--);
+    color: var(--cl--1--);
 }

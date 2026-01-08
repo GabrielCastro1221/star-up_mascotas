@@ -245,6 +245,39 @@ class ProductRepository {
             throw new Error(error.message);
         }
     }
+
+    async getProductReviews(productId) {
+        try {
+            const product = await productModel
+                .findById(productId)
+                .populate({
+                    path: "reviews",
+                    populate: {
+                        path: "user",
+                        select: "nombre _id email"
+                    }
+                })
+                .lean();
+            if (!product) {
+                throw new Error("Producto no encontrado");
+            }
+            return product.reviews;
+        } catch (error) {
+            logger.error("Error al obtener reseñas del producto:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
+    async getProductFeatures(productId) {
+        try {
+            const product = await productModel.findById(productId, "features").lean();
+            if (!product) {
+                throw new Error("Producto no encontrado");
+            } return product.features;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
 }
 
 module.exports = new ProductRepository();

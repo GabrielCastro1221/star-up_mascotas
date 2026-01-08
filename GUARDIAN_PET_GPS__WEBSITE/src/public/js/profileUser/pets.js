@@ -1,6 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     const viewPetsBtn = document.getElementById("view-pets");
     const petsContainer = document.querySelector(".pets-card");
+    const updateSection = document.getElementById("update-pet-user");
+    const nombreInput = document.getElementById("update_nombre_mascota");
+    const especieInput = document.getElementById("update_especie");
+    const razaInput = document.getElementById("update_raza");
+    const edadInput = document.getElementById("update_edad");
+    const usuarioInput = document.getElementById("update_usuario");
+    const sexoSelect = document.getElementById("update_sexo");
+    const updateForm = document.querySelector(".update-pet-form");
+    const fotoInput = document.getElementById("update_foto");
+    const fileNameSpan = document.getElementById("update-file-name");
+
+    fotoInput.addEventListener("change", () => {
+        if (fotoInput.files.length > 0) {
+            fileNameSpan.textContent = fotoInput.files[0].name;
+        } else {
+            fileNameSpan.textContent = "Ningún archivo seleccionado";
+        }
+    });
 
     async function eliminarMascota(petId) {
         const token = localStorage.getItem("token");
@@ -73,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         </div>
                     `;
+
                     card.querySelector(".delete-pet-btn").addEventListener("click", () => {
                         Swal.fire({
                             title: "¿Eliminar mascota?",
@@ -89,6 +108,19 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         });
                     });
+
+                    card.querySelector(".edit-pet-btn").addEventListener("click", () => {
+                        updateSection.style.display = "block";
+                        nombreInput.value = pet.nombre_mascota || "";
+                        especieInput.value = pet.especie || "";
+                        razaInput.value = pet.raza || "";
+                        edadInput.value = pet.edad || "";
+                        usuarioInput.value = pet.usuario || "";
+                        sexoSelect.value = pet.sexo || "";
+                        updateSection.dataset.petId = pet._id;
+                        fileNameSpan.textContent = "Ningún archivo seleccionado"; // reset al abrir
+                    });
+
                     petsContainer.appendChild(card);
                 });
             } else {
@@ -100,6 +132,58 @@ document.addEventListener("DOMContentLoaded", () => {
             petsContainer.innerHTML = `<p>Error de conexión con el servidor</p>`;
         }
     }
+
+    updateForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const petId = updateSection.dataset.petId;
+        const token = localStorage.getItem("token");
+        const formData = new FormData(updateForm);
+
+        try {
+            const response = await fetch(`/api/v1/pets/update/${petId}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                Toastify({
+                    text: "Mascota actualizada correctamente ✅",
+                    duration: 2000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #4caf50, #81c784)",
+                    style: { fontWeight: "600", borderRadius: "8px" }
+                }).showToast();
+
+                updateSection.style.display = "none";
+                cargarMascotas();
+            } else {
+                Toastify({
+                    text: result.message || "Error al actualizar la mascota",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #ff4d4d, #ff9999)",
+                    style: { fontWeight: "600", borderRadius: "8px" }
+                }).showToast();
+            }
+        } catch (error) {
+            Toastify({
+                text: "Error de conexión con el servidor",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #ff4d4d, #ff9999)",
+                style: { fontWeight: "600", borderRadius: "8px" }
+            }).showToast();
+        }
+    });
 
     viewPetsBtn.addEventListener("click", (e) => {
         e.preventDefault();

@@ -1,5 +1,7 @@
 const ConfigPageRepository = require("../repositories/configPage.repository");
 const GuardianPetConfigRepository = require("../repositories/guardianPetConfig.repository");
+const ProductRepository = require("../repositories/product.repository");
+const CategoryRepository = require("../repositories/category.repository");
 
 class ViewController {
     renderIndex = async (req, res) => {
@@ -12,9 +14,25 @@ class ViewController {
         }
     };
 
-    renderStore = (req, res) => {
+    renderStore = async (req, res) => {
         try {
-            res.render("store");
+            const categories = await CategoryRepository.getCategories();
+            res.render("store", { categories });
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+    
+    renderProductDetail = async (req, res) => {
+        try {
+            const productId = req.params.id;
+            const product = await ProductRepository.getProductById(productId);
+            if (!product) {
+                return res.redirect("/page-not-found");
+            }
+            const reviews = await ProductRepository.getProductReviews(productId) || [];
+            const features = await ProductRepository.getProductFeatures(productId) || [];
+            res.render("productDetail", { product, reviews, features });
         } catch (error) {
             res.render("pageNotFound");
         }
@@ -93,7 +111,7 @@ class ViewController {
         }
     };
 
-    renderProfileUser =  (req, res) => {
+    renderProfileUser = (req, res) => {
         try {
             res.render("profileUser");
         } catch (error) {

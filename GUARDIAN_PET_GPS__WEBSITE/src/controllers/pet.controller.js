@@ -42,10 +42,14 @@ class PetController {
     async updatePet(req, res) {
         const { id } = req.params;
         try {
-            const updatedPet = await PetRepository.updatePet(id, req.body);
+            const updateData = { ...req.body };
+            if (req.file && req.file.path) {
+                updateData.foto = req.file.path;
+            }
+            const updatedPet = await PetRepository.updatePet(id, updateData);
             res.status(200).json({
                 message: "Mascota actualizada correctamente",
-                mascota: updatedPet
+                mascota: updatedPet,
             });
         } catch (error) {
             res.status(500).json({ message: error.message });

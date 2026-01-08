@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", ViewsController.renderIndex);
 router.get("/tienda", ViewsController.renderStore);
+router.get("/tienda/:id", ViewsController.renderProductDetail);
 router.get("/rastrea-tu-mascota", ViewsController.renderFoundPet);
 router.get("/contacto", ViewsController.renderContact);
 router.get("/access-denied", ViewsController.renderAccessDenied);

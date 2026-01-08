@@ -1,0 +1,48 @@
+<section class="product-detail container">
+    <div class="detail-grid">
+        <div class="detail-image">
+            <img src="{{product.image}}" alt="{{product.title}}">
+            <div class="thumbnail-row thumb">
+                {{#each product.thumbnail}}
+                <img src="{{this.url}}" alt="Thumbnail {{@index}}" class="thumbnail">
+                {{/each}}
+            </div>
+        </div>
+        <div class="detail-info">
+            <h2 class="detail-title">{{product.title}}</h2>
+            <p class="detail-brand"><strong>Marca:</strong> {{product.brand}}</p>
+            <p class="detail-category"><strong>Categoría:</strong> {{product.category}}</p>
+            <p class="detail-code"><strong>Código:</strong> {{product.code}}</p>
+            <p class="detail-stock"><strong>Stock:</strong> {{product.stock}} unidades disponibles.</p>
+            <p class="detail-description">{{product.description}}</p>
+            <ul class="product__list" aria-label="Beneficios y opciones de compra">
+                <li class="list__item flex">
+                    <i class="fi fi-rr-camera-cctv icon"></i>
+                    Protegemos tu dinero
+                </li>
+                <li class="list__item flex">
+                    <i class="fi fi-rr-selling icon"></i>
+                    <a href="#" class="policy terms-btn">
+                        Consultar politicas de reembolso
+                    </a>
+                </li>
+                <li class="list__item flex">
+                    <i class="fi fi-rr-shipping-fast icon"></i>
+                    Envio contra entrega disponible
+                </li>
+            </ul>
+            {{> store/refundPoliciesModal}}
+            <p class="detail-price"><strong>Precio:</strong> ${{product.price}}</p>
+            <div class="details__actions">
+                <form class="add-to-cart-form" data-product-id="{{product._id}}" data-stock="{{product.stock}}">
+                    <label for="quantity" class="quantity-label">Seleccionar cantidad:</label>
+                    <input type="number" id="quantity" class="quantity text-light ms-1" value="1" min="1"
+                        max="{{product.quantity}}" aria-label="Cantidad de {{product.title}}">
+                </form>
+            </div>
+            <a href="#" class="page-btn buy-btn">
+                Comprar ahora <i class="fi fi-rr-shopping-cart-add"></i>
+            </a>
+        </div>
+    </div>
+</section>

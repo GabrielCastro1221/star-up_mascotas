@@ -12,6 +12,7 @@ const shippingRouter = require("../routes/shipping.routes");
 const configPageRouter = require("../routes/configPage.routes");
 const guardianPetConfigRouter = require("../routes/guardianPetConfig.routes");
 const uploadRouter = require("../routes/upload.routes");
+const reviewRouter = require("../routes/review.routes");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUiExpress = require("swagger-ui-express");
 const swaggerOptions = require("./swagger.middleware");
@@ -32,6 +33,7 @@ const setupRoutes = (app) => {
     app.use("/api/v1/shipping", shippingRouter);
     app.use("/api/v1/configPage", configPageRouter);
     app.use("/api/v1/guardianPetConfig", guardianPetConfigRouter);
+    app.use("/api/v1/reviews", reviewRouter);
     app.use("/api/v1", uploadRouter);
     app.use("/api-docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 };

@@ -1,0 +1,42 @@
+<section class="update-pet" id="update-pet-user">
+    <div class="update-container">
+        <h2>Actualizar Mi<span> Mascota</span></h2>
+        <form action="#" class="update-pet-form">
+            <div class="update-input-group">
+                <label for="update_nombre_mascota">Nombre</label>
+                <input type="text" id="update_nombre_mascota" name="nombre_mascota" required>
+            </div>
+            <div class="update-input-group">
+                <label for="update_especie">Especie</label>
+                <input type="text" id="update_especie" name="especie" required>
+            </div>
+            <div class="update-input-group">
+                <label for="update_raza">Raza</label>
+                <input type="text" id="update_raza" name="raza" required>
+            </div>
+            <div class="update-input-group">
+                <label for="update_edad">Edad</label>
+                <input type="text" id="update_edad" name="edad" required>
+            </div>
+            <div class="update-input-group" style="display: none;">
+                <label for="update_usuario">Usuario</label>
+                <input type="text" id="update_usuario" name="usuario" required readonly>
+            </div>
+            <div class="update-input-group">
+                <label for="update_sexo">Sexo</label>
+                <select id="update_sexo" name="sexo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="macho">Macho</option>
+                    <option value="hembra">Hembra</option>
+                </select>
+            </div>
+            <div class="update-input-group">
+                <label>Foto de la mascota</label>
+                <input type="file" id="update_foto" name="foto" accept="image/*" style="display:none;">
+                <label for="update_foto" class="update-upload-btn">Subir nueva foto</label>
+                <span id="update-file-name" class="update-file-name">Ningún archivo seleccionado</span>
+            </div>
+            <button type="submit" class="update-btn">Actualizar Mascota <i class="fi fi-rr-refresh"></i></button>
+        </form>
+    </div>
+</section>

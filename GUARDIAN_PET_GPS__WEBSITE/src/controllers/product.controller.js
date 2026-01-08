@@ -10,15 +10,12 @@ class ProductController {
                     public_id: file.filename,
                 }))
                 : [];
-
             const newProd = {
                 ...req.body,
                 image,
                 thumbnails,
             };
-
             const createdProduct = await ProductRepository.createProduct(newProd);
-
             return res.status(201).json({
                 status: "success",
                 message: "Producto creado correctamente",
@@ -42,11 +39,9 @@ class ProductController {
                 sort,
                 query,
             });
-
             if (products.productos.length === 0) {
                 return res.status(404).json({ message: "No se encontraron productos" });
             }
-
             res.status(200).json(products);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -60,7 +55,6 @@ class ProductController {
             if (req.file) {
                 photoUrl = req.file.path;
             }
-
             let thumbnails = req.body.thumbnails || [];
             if (req.files?.thumbnails) {
                 thumbnails = req.files.thumbnails.map((file) => ({
@@ -68,13 +62,11 @@ class ProductController {
                     public_id: file.filename,
                 }));
             }
-
             const updateData = {
                 ...req.body,
                 image: photoUrl,
                 thumbnails: thumbnails,
             };
-
             const updatedProduct = await ProductRepository.updateProduct(id, updateData);
             res
                 .status(200)
@@ -146,6 +138,26 @@ class ProductController {
                     .json({ message: "No se encontraron productos con ese término" });
             }
             res.status(200).json({ products });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getProductReviews(req, res) {
+        try {
+            const { id } = req.params;
+            const reviews = await ProductRepository.getProductReviews(id);
+            res.status(200).json(reviews);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getProductFeatures(req, res) {
+        try {
+            const { id } = req.params;
+            const features = await ProductRepository.getProductFeatures(id);
+            res.status(200).json({ features });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

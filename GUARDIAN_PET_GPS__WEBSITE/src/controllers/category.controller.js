@@ -5,7 +5,7 @@ class CategoryController {
         try {
             const categoryData = req.body;
             await CategoryRepository.createCategory(categoryData);
-            res.redirect("/perfil-admin");
+            res.status(201).json({ message: "Categoria creada con exito", category: categoryData});
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

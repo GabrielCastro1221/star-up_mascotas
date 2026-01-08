@@ -1,0 +1,19 @@
+<section class="container tabs" id="Tabs-prod-detail">
+    <div class="tabs-buttons">
+        <button class="tab-btn active" data-tab="features">Detalles del producto</button>
+        <button class="tab-btn" data-tab="testimonial">Opiniones de clientes</button>
+        <button class="tab-btn" data-tab="create-review">Opinar sobre el producto</button>
+    </div>
+
+    <div class="tabs-content">
+        <div id="features" class="tab-content active">
+            {{> store/features}}
+        </div>
+        <div id="testimonial" class="tab-content">
+            {{> store/testimonial}}
+        </div>
+        <div id="create-review" class="tab-content">
+            {{> store/createReview}}
+        </div>
+    </div>
+</section>

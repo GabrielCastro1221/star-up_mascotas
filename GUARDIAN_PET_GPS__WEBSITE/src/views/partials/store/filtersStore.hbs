@@ -1,12 +1,16 @@
+<h2 class="title-store">
+    Dispositivos GPS <span>Guardian Pet</span>
+</h2>
+
 <div class="filters row">
     <select name="category" id="category">
-        <option value="all">Todos los productos</option>
-        <option value="collar">Collares GPS</option>
-        <option value="arnes">Arneses GPS</option>
-        <option value="portatil">Dispositivos Portátiles</option>
+        <option value="all"><a href="/tienda">Todos los productos</a></option>
+        {{#each categories}}
+        <option value="{{category}}">{{category}}</option>
+        {{/each}}
     </select>
     <select name="price" id="price">
-        <option value="all">Todos los precios</option>
+        <option value="all"><a href="/tienda">Todos los precios</a></option>
         <option value="low">Menor precio</option>
         <option value="high">Mayor precio</option>
     </select>
