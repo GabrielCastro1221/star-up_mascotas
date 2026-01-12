@@ -105,6 +105,19 @@ class UserController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    async getUserTickets(req, res) {
+        try {
+            const { id } = req.params;
+            const tickets = await UserRepository.getUserTickets(id);
+            res.status(200).json({
+                message: "Tickets obtenidos con éxito",
+                tickets
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = new UserController();

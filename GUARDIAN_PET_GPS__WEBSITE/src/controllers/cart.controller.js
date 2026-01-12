@@ -7,8 +7,8 @@ class CartController {
         const quantity = req.body.quantity || 1;
         try {
             await CartRepository.addProductInCart(cartId, productId, quantity);
-            //res.redirect(`/cart/${cartId}`);
-            res.send("producto agregado con exito");
+            res.redirect(`/cart/${cartId}`);
+            //res.status(200).json({ message: "producto agregado con exito" });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

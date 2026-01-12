@@ -1,0 +1,41 @@
+<aside class="cart-summary">
+    <div class="summary-card">
+        <h3 class="summary-title">Resumen</h3>
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">${{subtotal}}</span>
+        </div>
+        <div class="label label__city">
+            <label for="city" class="title-t">Selecciona tu ciudad:</label>
+            <select class="select-field" name="city" id="city" required aria-label="Selecciona la ciudad de envío">
+                <option value="" disabled selected>Selecciona tu ciudad</option>
+                {{#each shipping}}
+                <option value="{{this.amount}}">{{this.city_ship}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="summary-row">
+            <span>Envío</span>
+            <span id="shipping">$0</span>
+        </div>
+
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">${{total}}</span>
+        </div>
+
+        <button class="page-btn checkout-btn">
+            Finalizar compra <i class="fi fi-rr-credit-card"></i>
+        </button>
+    </div>
+    <div class="cart-act-btn">
+        <a href="/tienda" class="page-btn btn-buy">
+            Seguir comprando <i class="fi fi-rr-credit-card"></i>
+        </a>
+        <button class="page-btn empty-cart">
+            Vaciar carrito <i class="fi fi-rr-credit-card"></i>
+        </button>
+    </div>
+</aside>

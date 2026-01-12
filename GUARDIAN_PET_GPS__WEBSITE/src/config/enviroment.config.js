@@ -34,6 +34,10 @@ const configObject = {
         email_from: process.env.EMAIL_FROM,
         email_service: process.env.EMAIL_SERVICE,
     },
+    epayco: {
+        epayco_public_key: process.env.EPAYCO_PUBLIC_KEY,
+        epayco_mode: process.env.EPAYCO_MODE,
+    },
 };
 
 module.exports = configObject;

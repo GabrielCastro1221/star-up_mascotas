@@ -1,0 +1,25 @@
+<div class="cart-items">
+    {{#each cart.products}}
+    <article class="cart-item">
+        <div class="cart-media">
+            <img src="{{this.product.image}}" alt="{{this.product.title}}" class="cart-img">
+        </div>
+        <div class="cart-info">
+            <h3 class="cart-name">{{this.product.title}}</h3>
+            <p class="cart-desc">{{this.product.description}}</p>
+            <div class="cart-meta">
+                <span class="cart-price"><strong>Precio:</strong> ${{this.product.price}}</span>
+                <div class="cart-qty-control">
+                    <span class="qty-label"><strong>Cantidad:</strong></span>
+                    <span class="qty-value">{{this.quantity}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="cart-actions">
+            <button class="page-btn remove-btn" data-id="{{this.product._id}}">
+                <i class="fi fi-rr-trash"></i> Eliminar
+            </button>
+        </div>
+    </article>
+    {{/each}}
+</div>

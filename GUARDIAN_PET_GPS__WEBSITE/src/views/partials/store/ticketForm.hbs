@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/store/ticketForm.css">
+
+<section class="update ticket-container" id="update-user">
+    <div class="container">
+        <form action="#" class="update-form">
+            <div class="input-group">
+                <label for="name-user-ticket">Nombre completo</label>
+                <input type="text" id="name-user-ticket" name="nombre" required>
+            </div>
+            <div class="input-group">
+                <label for="email-user-ticket">Correo electrónico</label>
+                <input type="email" id="email-user-ticket" name="email" readonly>
+            </div>
+            <div class="input-group">
+                <label for="ciudad-user-ticket">Ciudad</label>
+                <input type="text" id="ciudad-user-ticket" name="ciudad" required>
+            </div>
+            <div class="input-group">
+                <label for="direccion-user-ticket">Dirección</label>
+                <input type="text" id="direccion-user-ticket" name="direccion" required>
+            </div>
+            <div class="input-group">
+                <label for="telefono-user-ticket">Teléfono</label>
+                <input type="text" id="telefono-user-ticket" name="telefono" required>
+            </div>
+            <button type="submit" class="page-btn">Actualizar datos <i class="fi fi-rr-refresh"></i></button>
+        </form>
+    </div>
+</section>
+
+<script src="/js/store/updateUser.js"></script>

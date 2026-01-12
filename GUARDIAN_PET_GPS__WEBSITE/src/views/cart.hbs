@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/store/cart.css">
+
+<section class="cart container">
+    <header class="cart-header">
+        <h2 class="cart-title">Carrito de <span>compras</span></h2>
+        <p class="cart-subtitle">Revisa tus productos antes de finalizar la compra</p>
+    </header>
+    {{#if cart.products.length}}
+    <div class="cart-layout">
+        {{> store/cart }}
+        {{> store/cartSummary }}
+    </div>
+    {{else}}
+    <div class="cart-empty">
+        <i class="fi fi-rr-info icon"></i>
+        <p>Tu carrito está vacío <i class="fi fi-ss-dolly-flatbed-empty"></i></p>
+        <a href="/tienda" class="page-btn">Ir a la tienda</a>
+    </div>
+    {{/if}}
+</section>
+
+<script src="/js/store/cart.js"></script>
+<script src="/js/store/ticket.js"></script>

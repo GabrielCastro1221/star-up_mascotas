@@ -36,6 +36,7 @@
     justify-content: center;
     margin-top: 2em;
     gap: 0.5em;
+    margin-bottom: 20px;
 }
 
 .pagination .page-btn {
@@ -96,8 +97,9 @@
 .p-content h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--cl--2--);
+    color: var(--cl--3--);
     margin-bottom: 0.5em;
+    font-family: "DynaPuff", cursive;
 }
 
 .p-content p {
@@ -106,17 +108,8 @@
     margin-bottom: 0.8em;
 }
 
-.p-content .page-btn {
-    display: inline-block;
-    padding: 0.6em 1.2em;
-    border-radius: 8px;
-    background: var(--cl--3--);
-    color: var(--cl--1--);
+.p-content p strong {
+    color: var(--cl--3--);
     font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.p-content .page-btn:hover {
-    background: var(--cl--4--);
-    color: var(--cl--1--);
+    font-family: "DynaPuff", cursive;
 }

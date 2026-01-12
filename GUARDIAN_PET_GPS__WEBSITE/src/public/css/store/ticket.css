@@ -1,0 +1,154 @@
+.ticket-container {
+    margin-top: 40px;
+}
+
+.ticket {
+    max-width: 100%;
+    margin: 2rem auto;
+    background: var(--cl--1--);
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+    padding: 2rem;
+    margin-top: -20px;
+}
+
+.ticket-header {
+    border-bottom: 2px solid var(--cl--5--);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.ticket-title {
+    font-weight: 600;
+}
+
+.ticket-title span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.ticket-code,
+.ticket-date,
+.ticket-status {
+    font-weight: 600;
+    color: var(--cl--3--);
+}
+
+.ticket-code span,
+.ticket-date span,
+.ticket-status span {
+    font-weight: 600;
+    color: var(--cl--2--);
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+.product-title {
+    font-weight: 600;
+}
+
+.product-qty {
+    font-weight: 600;
+}
+
+.product-qty span {
+    font-weight: 600;
+}
+
+.product-price {
+    font-weight: 600;
+}
+
+.product-price span {
+    font-weight: 600;
+}
+
+.ticket-body {
+    margin-top: 1rem;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: var(--cl--3--);
+    font-weight: 600;
+}
+
+.ticket-products {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ticket-product {
+    display: flex;
+    justify-content: space-between;
+    background: var(--cl--5--);
+    padding: 0.8rem;
+    border-radius: 8px;
+}
+
+.product-title {
+    font-weight: 600;
+}
+
+.product-price {
+    font-weight: bold;
+    color: var(--cl--2--);
+}
+
+.ticket-summary {
+    margin-top: 1rem;
+    background: var(--cl--5--);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4rem 0;
+}
+
+.summary-row.total {
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-top: 1px solid var(--cl--5--);
+    padding-top: 0.6rem;
+}
+
+.resumen-subtitle,
+.price-s {
+    color: var(--cl--2--);
+    font-weight: 600;
+}
+
+.amount {
+    color: var(--cl--3--);
+    font-weight: 600;
+}
+
+.payment {
+    margin-top: 20px;
+}
+
+.shipping-note {
+    font-size: 0.95rem;
+    color: var(--cl--6--);
+    background: var(--cl--1--);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--cl--6--);
+}
+
+.resumen-subtitle-s {
+    color: var(--cl--3--);
+    font-weight: 600;
+}

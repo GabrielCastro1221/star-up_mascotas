@@ -108,6 +108,18 @@ class UserRepository {
             throw new Error(error.message);
         }
     }
+
+    async getUserTickets(userId) {
+        try {
+            const user = await userModel.findById(userId).populate("tickets");
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+            return user.tickets;
+        } catch (error) {
+            throw new Error(`Error al obtener los tickets del usuario: ${error.message}`);
+        }
+    }
 }
 
 module.exports = new UserRepository();

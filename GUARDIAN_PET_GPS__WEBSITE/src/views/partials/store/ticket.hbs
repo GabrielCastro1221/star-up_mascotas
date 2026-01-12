@@ -1,0 +1,70 @@
+<section class="ticket container">
+    <h2 class="ticket-title">Ticket de <span>compra</span></h2>
+    <p class="ticket-code">Código: <span>{{ticket.code}}</span></p>
+    <p class="ticket-date">Fecha: <span>{{formatDate ticket.purchase_datetime}}</span></p>
+    <p class="ticket-status">Estado: <span>{{ticket.status}}</span></p>
+
+    <div class="ticket-body">
+        <h3 class="section-title">Productos</h3>
+        <div class="ticket-products">
+            {{#each ticket.products}}
+            <div class="ticket-product">
+                <div class="product-info">
+                    <h4 class="product-title">{{this.title}}</h4>
+                    <p class="product-qty">Cantidad: <span>{{this.quantity}}</span></p>
+                </div>
+                <div class="product-price">
+                    $<span> {{this.price}}</span>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <h3 class="section-title">Resumen</h3>
+        <div class="ticket-summary">
+            <div class="summary-row">
+                <span class="resumen-subtitle">Subtotal</span>
+                <span class="price-s">$ {{ticket.subtotal}}</span>
+            </div>
+            <div class="summary-row">
+                <span class="resumen-subtitle">Envío</span>
+                <span class="price-s">$ {{ticket.shipping}}</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle">Total</span>
+                <span class="amount">$ {{ticket.amount}}</span>
+            </div>
+        </div>
+
+        <h3 class="section-title">Datos de envío</h3>
+        <p class="shipping-note">
+            Por favor revisa cuidadosamente tus datos de envío.
+            Si alguno no es correcto, actualízalo antes de finalizar la compra.
+        </p>
+        <div class="ticket-summary">
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Nombre:</span>
+                <span class="price-s" id="user-name">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Email:</span>
+                <span class="price-s" id="user-email">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Ciudad:</span>
+                <span class="price-s" id="user-city">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Dirección:</span>
+                <span class="price-s" id="user-address">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Teléfono:</span>
+                <span class="price-s" id="user-phone">---</span>
+            </div>
+        </div>
+    </div>
+    <button class="page-btn payment">Métodos de pago seguros</button>
+</section>
+
+<script src="/js/store/dataShipping.js"></script>

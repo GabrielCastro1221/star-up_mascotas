@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
             card.classList.add("p-card");
 
             card.innerHTML = `
-                <a href="/tienda/${prod._id}" alt="Detalle del producto">
+                <a href="/tienda/${prod._id}" title="Detalle del producto">
                 <div class="img row">
                     <img src="${prod.image || '/assets/images/default-product.png'}" alt="Detalle del producto">
                     <div class="p-content">
                         <h3>${prod.title}</h3>
                         <p>${prod.description || "Sin descripción disponible"}</p>
                         <p><strong>Precio:</strong> $${prod.price}</p>
-                        <a href="#" class="page-btn" data-id="${prod.id}">
+                        <a href="#" class="page-btn buy-btn" data-id="${prod._id}">
                             Comprar ahora <i class="fi fi-rr-shopping-cart-add"></i>
                         </a>
                     </div>
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <h3>${prod.title}</h3>
                         <p>${prod.description || "Sin descripción disponible"}</p>
                         <p><strong>Precio:</strong> $${prod.price}</p>
-                        <a href="#" class="page-btn" data-id="${prod.id}">
+                        <a href="#" class="page-btn buy-btn" data-id="${prod._id}">
                             Comprar ahora <i class="fi fi-rr-shopping-cart-add"></i>
                         </a>
                     </div>
@@ -114,6 +114,40 @@ document.addEventListener("DOMContentLoaded", () => {
             socket.emit("searchProducts", query);
         } else {
             getProducts(1);
+        }
+    });
+
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const cartId = userData?.cart;
+
+    document.addEventListener("click", async (e) => {
+        const btn = e.target.closest(".buy-btn");
+        if (btn) {
+            e.preventDefault();
+            const productId = btn.dataset.id;
+            const userData = JSON.parse(localStorage.getItem("user"));
+            const cartId = userData?.cart;
+            if (!cartId) {
+                alert("No tienes un carrito activo. Inicia sesión o crea uno.");
+                return;
+            }
+            try {
+                const response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ quantity: 1 })
+                });
+
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    const data = await response.json();
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error("Error al agregar producto:", error);
+                alert("No se pudo agregar el producto al carrito");
+            }
         }
     });
     getProducts();

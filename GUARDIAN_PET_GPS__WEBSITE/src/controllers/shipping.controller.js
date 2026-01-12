@@ -5,7 +5,8 @@ class ShippingController {
         try {
             const shippingData = req.body;
             await ShippinRepository.createShipping(shippingData);
-            res.redirect("/perfil-admin");
+            res.status(201).json({ status: true, message: "Destino creado con exito", shippingData })
+            //res.redirect("/perfil-admin");
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

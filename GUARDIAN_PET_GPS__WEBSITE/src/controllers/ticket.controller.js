@@ -8,32 +8,26 @@ class TicketController {
     async finishPurchase(req, res) {
         const cartId = req.params.cid;
         const { amount, shipping, subtotal } = req.body;
-
         try {
             const cart = await CartRepository.getProductsInCart(cartId);
             const user = await TicketRepository.findUserByCartId(cartId);
-
             if (!cart || !user) {
-                console.warn("Carrito o usuario no encontrado");
                 return res.status(404).json({ error: "Carrito o usuario no encontrado" });
             }
-
             if (!Array.isArray(cart.products)) {
                 throw new Error("El carrito no tiene productos o no fueron poblados correctamente.");
             }
-            const clonedProducts = JSON.parse(JSON.stringify(cart.products));
-            const productsData = clonedProducts.map((product) => ({
-                productId: product.product._id,
-                title: product.product.title,
-                price: product.product.price,
-                quantity: product.quantity,
+            const productsData = cart.products.map((item) => ({
+                productId: item.product._id,
+                title: item.product.title,
+                price: item.product.price,
+                quantity: item.quantity,
             }));
-
             const ticketData = {
                 code: await ticketNumberRandom(),
-                amount,
-                shipping,
-                subtotal,
+                amount: Number(amount),
+                shipping: Number(shipping),
+                subtotal: Number(subtotal),
                 purchaser: user._id,
                 cart: cartId,
                 purchase_datetime: new Date(),
@@ -42,10 +36,9 @@ class TicketController {
             const ticket = await TicketRepository.createTicket(ticketData);
             await TicketRepository.addTicketToUser(user._id, ticket._id);
             await CartRepository.emptyCart(cartId);
-            await mailer.SendPurchaseConfirmation(user.email, ticketData);
-            res.status(201).json({ _id: ticket._id });
+            res.status(201).json({ _id: ticket._id, message: "Compra realizada con éxito" });
         } catch (error) {
-            logger.error(error.message);
+            console.error(error);
             res.status(500).json({ error: "Error al realizar la compra, intenta nuevamente" });
         }
     }

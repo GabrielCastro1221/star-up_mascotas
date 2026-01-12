@@ -2,6 +2,9 @@ const ConfigPageRepository = require("../repositories/configPage.repository");
 const GuardianPetConfigRepository = require("../repositories/guardianPetConfig.repository");
 const ProductRepository = require("../repositories/product.repository");
 const CategoryRepository = require("../repositories/category.repository");
+const CartRepository = require("../repositories/cart.repository");
+const ShippingRepository = require("../repositories/shipping.repository");
+const TicketRepository = require("../repositories/ticket.repository");
 
 class ViewController {
     renderIndex = async (req, res) => {
@@ -22,7 +25,7 @@ class ViewController {
             res.render("pageNotFound");
         }
     };
-    
+
     renderProductDetail = async (req, res) => {
         try {
             const productId = req.params.id;
@@ -33,6 +36,39 @@ class ViewController {
             const reviews = await ProductRepository.getProductReviews(productId) || [];
             const features = await ProductRepository.getProductFeatures(productId) || [];
             res.render("productDetail", { product, reviews, features });
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderCart = async (req, res) => {
+        try {
+            const cartId = req.params.id;
+            const cart = await CartRepository.getCartById(cartId);
+            const shipping = await ShippingRepository.getShipping();
+            if (!shipping) {
+                res.status(404).json({ status: false, message: "no hay disponibilidad de encios en el momento, intentanlo mas tarde" });
+            }
+            if (!cart) {
+                return res.redirect("/page-not-found");
+            }
+            const subtotal = cart.products.reduce((acc, item) => {
+                return acc + item.product.price * item.quantity;
+            }, 0);
+            res.render("cart", { cart, subtotal, shipping });
+        } catch (error) {
+            res.redirect("/page-not-found");
+        }
+    };
+
+    renderTicket = async (req, res) => {
+        try {
+            const ticketId = req.params.id;
+            const ticket = await TicketRepository.getTicketById(ticketId);
+            if (!ticket) {
+                return res.redirect("/page-not-found");
+            }
+            res.render("ticket", { ticket });
         } catch (error) {
             res.render("pageNotFound");
         }
