@@ -5,6 +5,7 @@ const CategoryRepository = require("../repositories/category.repository");
 const CartRepository = require("../repositories/cart.repository");
 const ShippingRepository = require("../repositories/shipping.repository");
 const TicketRepository = require("../repositories/ticket.repository");
+const UserRepository = require("../repositories/user.repository");
 
 class ViewController {
     renderIndex = async (req, res) => {

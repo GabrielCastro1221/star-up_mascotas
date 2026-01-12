@@ -13,11 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileNameSpan = document.getElementById("update-file-name");
 
     fotoInput.addEventListener("change", () => {
-        if (fotoInput.files.length > 0) {
-            fileNameSpan.textContent = fotoInput.files[0].name;
-        } else {
-            fileNameSpan.textContent = "Ningún archivo seleccionado";
-        }
+        fileNameSpan.textContent = fotoInput.files.length > 0
+            ? fotoInput.files[0].name
+            : "Ningún archivo seleccionado";
     });
 
     async function eliminarMascota(petId) {
@@ -76,22 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     const card = document.createElement("div");
                     card.classList.add("pet-card");
                     card.innerHTML = `
-                        <img src="${pet.foto ? pet.foto : '/assets/images/default-pet.jpg'}"
-                            alt="Foto de ${pet.nombre_mascota}" class="pet-photo">
-                        <div class="pet-info">
-                            <h3>${pet.nombre_mascota || 'Sin nombre'}</h3>
-                            <p><span>Especie:</span> ${pet.especie || '-'}</p>
-                            <p><span>Raza:</span> ${pet.raza || '-'}</p>
-                            <p><span>Edad:</span> ${pet.edad ? pet.edad + ' años' : '-'}</p>
-                            <p><span>Sexo:</span> ${pet.sexo || '-'}</p>
-                            <div class="pet-btns">
-                                <button class="track-pet-btn track" data-id="${pet._id}">Ver en mapa</button>
-                                <button class="edit-pet-btn edit" data-id="${pet._id}">Editar</button>
-                                <button class="delete-pet-btn delete" data-id="${pet._id}">Eliminar</button>
-                            </div>
+                    <img src="${pet.foto ? pet.foto : '/assets/images/default-pet.jpg'}"
+                        alt="Foto de ${pet.nombre_mascota}" class="pet-photo">
+                    <div class="pet-info">
+                        <h3>${pet.nombre_mascota || 'Sin nombre'}</h3>
+                        <p><span>Especie:</span> ${pet.especie || '-'}</p>
+                        <p><span>Raza:</span> ${pet.raza || '-'}</p>
+                        <p><span>Edad:</span> ${pet.edad ? pet.edad + ' años' : '-'}</p>
+                        <p><span>Sexo:</span> ${pet.sexo || '-'}</p>
+                        <div class="pet-btns">
+                            <button class="track-pet-btn track" data-id="${pet._id}">Ver en mapa</button>
+                            <button class="edit-pet-btn edit" data-id="${pet._id}">Editar</button>
+                            <button class="delete-pet-btn delete" data-id="${pet._id}">Eliminar</button>
                         </div>
-                    `;
-
+                    </div>
+                `;
                     card.querySelector(".delete-pet-btn").addEventListener("click", () => {
                         Swal.fire({
                             title: "¿Eliminar mascota?",
@@ -103,9 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             confirmButtonText: "Sí, eliminar",
                             cancelButtonText: "Cancelar"
                         }).then((result) => {
-                            if (result.isConfirmed) {
-                                eliminarMascota(pet._id);
-                            }
+                            if (result.isConfirmed) eliminarMascota(pet._id);
                         });
                     });
 
@@ -118,14 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         usuarioInput.value = pet.usuario || "";
                         sexoSelect.value = pet.sexo || "";
                         updateSection.dataset.petId = pet._id;
-                        fileNameSpan.textContent = "Ningún archivo seleccionado"; // reset al abrir
+                        fileNameSpan.textContent = "Ningún archivo seleccionado";
                     });
 
                     petsContainer.appendChild(card);
                 });
             } else {
                 petsContainer.style.display = "block";
-                petsContainer.innerHTML = `<p>No tienes mascotas registradas aún</p>`;
+                petsContainer.innerHTML = `<p>No tienes mascotas registradas aún 🐾</p>`;
             }
         } catch (error) {
             petsContainer.style.display = "block";
@@ -135,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         const petId = updateSection.dataset.petId;
         const token = localStorage.getItem("token");
         const formData = new FormData(updateForm);
@@ -143,24 +137,20 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(`/api/v1/pets/update/${petId}`, {
                 method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                },
+                headers: { "Authorization": `Bearer ${token}` },
                 body: formData
             });
-
             const result = await response.json();
 
             if (response.ok) {
                 Toastify({
-                    text: "Mascota actualizada correctamente ✅",
+                    text: "Mascota actualizada correctamente",
                     duration: 2000,
                     gravity: "top",
                     position: "right",
                     backgroundColor: "linear-gradient(to right, #4caf50, #81c784)",
                     style: { fontWeight: "600", borderRadius: "8px" }
                 }).showToast();
-
                 updateSection.style.display = "none";
                 cargarMascotas();
             } else {
@@ -187,6 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     viewPetsBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        cargarMascotas();
+        if (petsContainer.style.display === "grid" || petsContainer.style.display === "block") {
+            petsContainer.style.display = "none";
+            viewPetsBtn.innerHTML = `Mis mascotas registradas <i class="fi fi-rr-paw"></i>`;
+        } else {
+            cargarMascotas();
+            viewPetsBtn.innerHTML = `Cerrar mascotas <i class="fi fi-rr-cross"></i>`;
+        }
     });
 });
