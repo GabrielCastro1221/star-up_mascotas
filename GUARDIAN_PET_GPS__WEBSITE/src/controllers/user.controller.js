@@ -58,58 +58,6 @@ class UserController {
         }
     }
 
-    async updateUser(req, res) {
-        const { id } = req.params;
-        try {
-            const updateData = { ...req.body };
-            if (req.file && req.file.path) {
-                updateData.foto = req.file.path;
-            }
-            const updatedUser = await UserRepository.updateUser(id, updateData);
-            res.status(200).json({
-                message: "Usuario actualizado correctamente",
-                user: updatedUser,
-            });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async deleteUser(req, res) {
-        const { id } = req.params;
-        try {
-            const deletedUser = await UserRepository.deleteUser(id);
-            await MailerController.accountDeleted(deletedUser);
-            res.status(200).json({
-                message: "Usuario eliminado",
-                usuario: deletedUser
-            });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async changeRolAdmin(req, res) {
-        const { id } = req.params;
-        try {
-            const updatedUser = await UserRepository.changeRole(id, "admin");
-            await MailerController.roleChangedToAdmin(updatedUser);
-            res.status(200).json(updatedUser);
-        } catch (error) {
-            res.status(500).send(error.message);
-        }
-    }
-
-    async changeRolUser(req, res) {
-        const { id } = req.params;
-        try {
-            const updatedUser = await UserRepository.changeRole(id, "user");
-            res.status(200).json(updatedUser);
-        } catch (error) {
-            res.status(500).send(error.message);
-        }
-    }
-
     async getUserProfile(req, res) {
         const userId = req.user._id;
         try {
@@ -145,6 +93,58 @@ class UserController {
             res.status(200).json({
                 message: "Tickets obtenidos con éxito",
                 tickets
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async updateUser(req, res) {
+        const { id } = req.params;
+        try {
+            const updateData = { ...req.body };
+            if (req.file && req.file.path) {
+                updateData.foto = req.file.path;
+            }
+            const updatedUser = await UserRepository.updateUser(id, updateData);
+            res.status(200).json({
+                message: "Usuario actualizado correctamente",
+                user: updatedUser,
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async changeRolAdmin(req, res) {
+        const { id } = req.params;
+        try {
+            const updatedUser = await UserRepository.changeRole(id, "admin");
+            await MailerController.roleChangedToAdmin(updatedUser);
+            res.status(200).json(updatedUser);
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    }
+
+    async changeRolUser(req, res) {
+        const { id } = req.params;
+        try {
+            const updatedUser = await UserRepository.changeRole(id, "user");
+            res.status(200).json(updatedUser);
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    }
+
+    async deleteUser(req, res) {
+        const { id } = req.params;
+        try {
+            const deletedUser = await UserRepository.deleteUser(id);
+            await MailerController.accountDeleted(deletedUser);
+            res.status(200).json({
+                message: "Usuario eliminado",
+                usuario: deletedUser
             });
         } catch (error) {
             res.status(500).json({ message: error.message });

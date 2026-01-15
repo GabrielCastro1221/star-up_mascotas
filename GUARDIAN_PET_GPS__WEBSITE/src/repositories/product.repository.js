@@ -94,77 +94,6 @@ class ProductRepository {
         }
     }
 
-    async updateProduct(id, updateData) {
-        try {
-            const product = await productModel.findByIdAndUpdate(
-                id,
-                { $set: updateData },
-                { new: true, runValidators: true }
-            );
-            if (!product) {
-                throw new Error("Producto no encontrado");
-            }
-            return product;
-        } catch (error) {
-            logger.error("Error al actualizar producto:", error.message);
-            throw new Error(error.message);
-        }
-    }
-
-    async deleteProduct(pid) {
-        const deleteProd = await productModel.findByIdAndDelete(pid);
-        if (!deleteProd) {
-            logger.warning("Producto no encontrado");
-        }
-        logger.info("Producto eliminado");
-        return deleteProd;
-    }
-
-    async featureProduct(id) {
-        const product = await productModel.findById(id);
-        if (!product) {
-            throw new Error("No hay productos destacados disponibles");
-        }
-        const currentType = product.type_product;
-        const newType = currentType === "destacado" ? null : "destacado";
-        const prod = await productModel.findByIdAndUpdate(
-            id,
-            { type_product: newType },
-            { new: true }
-        );
-        return prod;
-    }
-
-    async newArrive(id) {
-        const product = await productModel.findById(id);
-        if (!product) {
-            throw new Error("No hay nuevos arribos disponibles");
-        }
-        const currentType = product.type_product;
-        const newType = currentType === "nuevo arribo" ? null : "nuevo arribo";
-        const prod = await productModel.findByIdAndUpdate(
-            id,
-            { type_product: newType },
-            { new: true }
-        );
-        return prod;
-    }
-
-    async bestSeller(id) {
-        const product = await productModel.findById(id);
-        if (!product) {
-            throw new Error("No hay productos mas vendidos disponibles");
-        }
-        const currentType = product.type_product;
-        const newType = currentType === "mas vendido" ? null : "mas vendido";
-        const prod = await productModel.findByIdAndUpdate(
-            id,
-            { type_product: newType },
-            { new: true }
-        );
-        return prod;
-    }
-
     async getFeaturedProducts(page = 1) {
         try {
             const options = {
@@ -277,6 +206,77 @@ class ProductRepository {
         } catch (error) {
             throw new Error(error.message);
         }
+    }
+
+    async updateProduct(id, updateData) {
+        try {
+            const product = await productModel.findByIdAndUpdate(
+                id,
+                { $set: updateData },
+                { new: true, runValidators: true }
+            );
+            if (!product) {
+                throw new Error("Producto no encontrado");
+            }
+            return product;
+        } catch (error) {
+            logger.error("Error al actualizar producto:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
+    async featureProduct(id) {
+        const product = await productModel.findById(id);
+        if (!product) {
+            throw new Error("No hay productos destacados disponibles");
+        }
+        const currentType = product.type_product;
+        const newType = currentType === "destacado" ? null : "destacado";
+        const prod = await productModel.findByIdAndUpdate(
+            id,
+            { type_product: newType },
+            { new: true }
+        );
+        return prod;
+    }
+
+    async newArrive(id) {
+        const product = await productModel.findById(id);
+        if (!product) {
+            throw new Error("No hay nuevos arribos disponibles");
+        }
+        const currentType = product.type_product;
+        const newType = currentType === "nuevo arribo" ? null : "nuevo arribo";
+        const prod = await productModel.findByIdAndUpdate(
+            id,
+            { type_product: newType },
+            { new: true }
+        );
+        return prod;
+    }
+
+    async bestSeller(id) {
+        const product = await productModel.findById(id);
+        if (!product) {
+            throw new Error("No hay productos mas vendidos disponibles");
+        }
+        const currentType = product.type_product;
+        const newType = currentType === "mas vendido" ? null : "mas vendido";
+        const prod = await productModel.findByIdAndUpdate(
+            id,
+            { type_product: newType },
+            { new: true }
+        );
+        return prod;
+    }
+
+    async deleteProduct(pid) {
+        const deleteProd = await productModel.findByIdAndDelete(pid);
+        if (!deleteProd) {
+            logger.warning("Producto no encontrado");
+        }
+        logger.info("Producto eliminado");
+        return deleteProd;
     }
 }
 

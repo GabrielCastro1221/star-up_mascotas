@@ -2,7 +2,7 @@ const TicketRepository = require("../repositories/ticket.repository");
 const CartRepository = require("../repositories/cart.repository");
 const { ticketNumberRandom } = require("../utils/cart.util");
 const { logger } = require("../middlewares/logger.middleware");
-const mailer = require("../services/mailer/nodemailer.services");
+const MailerController = require("../services/mailer/nodemailer.services");
 
 class TicketController {
     async finishPurchase(req, res) {
@@ -36,6 +36,15 @@ class TicketController {
             const ticket = await TicketRepository.createTicket(ticketData);
             await TicketRepository.addTicketToUser(user._id, ticket._id);
             await CartRepository.emptyCart(cartId);
+            await MailerController.sendPurchaseTicket({
+                email: user.email,
+                nombre: user.nombre,
+                ticketId: ticket.code,
+                fechaCompra: ticket.purchase_datetime.toLocaleString(),
+                productos: productsData.map(p => ({ nombre: p.title, cantidad: p.quantity, precio: p.price })), total: ticket.amount, metodoPago: "Tarjeta / Transferencia",
+                direccionEnvio: user.direccion || "No especificada",
+                ciudadEnvio: user.ciudad || "No especificada"
+            });
             res.status(201).json({ _id: ticket._id, message: "Compra realizada con éxito" });
         } catch (error) {
             console.error(error);
@@ -69,22 +78,11 @@ class TicketController {
         }
     }
 
-    async deleteTicket(req, res) {
-        const { id } = req.params;
-        try {
-            const deleteTicket = await TicketRepository.deleteTicket(id);
-            res
-                .status(200)
-                .json({ message: "Ticket eliminado", ticket: deleteTicket });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
     async payTicket(req, res) {
         const id = req.params.id;
         try {
             const updatedTicket = await TicketRepository.payTicket(id);
+            await MailerController.sendTicketPaidEmail(user, updatedTicket);
             res.status(200).json({
                 message: "El estado del ticket se actualizó a pagado",
                 ticket: updatedTicket,
@@ -100,6 +98,7 @@ class TicketController {
         const id = req.params.id;
         try {
             const updatedTicket = await TicketRepository.payCancel(id);
+            await MailerController.sendTicketCancelledEmail(user, updatedTicket);
             res.status(200).json({
                 message: "El estado del ticket se actualizó a cancelado",
                 ticket: updatedTicket,
@@ -115,6 +114,7 @@ class TicketController {
         const id = req.params.id;
         try {
             const updatedTicket = await TicketRepository.payProcess(id);
+            await MailerController.sendTicketInProcessEmail(user, updatedTicket);
             res.status(200).json({
                 message: "El estado del ticket se actualizó a en proceso",
                 ticket: updatedTicket,
@@ -123,6 +123,18 @@ class TicketController {
             res.status(500).json({
                 message: error.message || "Error al cambiar el estado del ticket",
             });
+        }
+    }
+
+    async deleteTicket(req, res) {
+        const { id } = req.params;
+        try {
+            const deleteTicket = await TicketRepository.deleteTicket(id);
+            res
+                .status(200)
+                .json({ message: "Ticket eliminado", ticket: deleteTicket });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
     }
 }

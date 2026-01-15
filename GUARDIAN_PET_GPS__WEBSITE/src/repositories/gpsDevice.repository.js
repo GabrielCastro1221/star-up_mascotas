@@ -47,6 +47,30 @@ class GPSDeviceRepository {
         }
     }
 
+    async getLastLocation(id) {
+        try {
+            const gps = await gpsDeviceModel.findById(id);
+            if (!gps) {
+                throw new Error("Dispositivo GPS no encontrado");
+            }
+            return gps.ultimaUbicacion;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    async getHistoricalLocations(id) {
+        try {
+            const gps = await gpsDeviceModel.findById(id);
+            if (!gps) {
+                throw new Error("Dispositivo GPS no encontrado");
+            }
+            return gps.historialUbicaciones;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
     async updateGPSDevice(id, updateData) {
         try {
             const gps = await gpsDeviceModel.findById(id);
@@ -58,18 +82,6 @@ class GPSDeviceRepository {
             return gps;
         } catch (error) {
             throw new Error(`Error al actualizar el dispositivo GPS: ${error.message}`);
-        }
-    }
-
-    async deleteGPSDevice(id) {
-        try {
-            const gps = await gpsDeviceModel.findByIdAndDelete(id);
-            if (!gps) {
-                throw new Error("Dispositivo GPS no encontrado");
-            }
-            return gps;
-        } catch (error) {
-            throw new Error(error.message);
         }
     }
 
@@ -90,25 +102,13 @@ class GPSDeviceRepository {
         }
     }
 
-    async getLastLocation(id) {
+    async deleteGPSDevice(id) {
         try {
-            const gps = await gpsDeviceModel.findById(id);
+            const gps = await gpsDeviceModel.findByIdAndDelete(id);
             if (!gps) {
                 throw new Error("Dispositivo GPS no encontrado");
             }
-            return gps.ultimaUbicacion;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
-    async getHistoricalLocations(id) {
-        try {
-            const gps = await gpsDeviceModel.findById(id);
-            if (!gps) {
-                throw new Error("Dispositivo GPS no encontrado");
-            }
-            return gps.historialUbicaciones;
+            return gps;
         } catch (error) {
             throw new Error(error.message);
         }

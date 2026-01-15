@@ -99,18 +99,6 @@ class TicketRepository {
         }
     }
 
-    async deleteTicket(id) {
-        try {
-            const ticket = await ticketModel.findByIdAndDelete(id);
-            if (!ticket) {
-                throw new Error("Ticket no encontrado");
-            }
-            return ticket;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
     async payTicket(id) {
         try {
             const ticket = await ticketModel.findById(id);
@@ -152,6 +140,18 @@ class TicketRepository {
             return ticket;
         } catch (error) {
             logger.error("Error al actualizar el estado del ticket:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
+    async deleteTicket(id) {
+        try {
+            const ticket = await ticketModel.findByIdAndDelete(id);
+            if (!ticket) {
+                throw new Error("Ticket no encontrado");
+            }
+            return ticket;
+        } catch (error) {
             throw new Error(error.message);
         }
     }

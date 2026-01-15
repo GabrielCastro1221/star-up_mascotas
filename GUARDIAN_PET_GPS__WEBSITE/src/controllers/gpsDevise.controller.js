@@ -37,6 +37,26 @@ class GPSDeviceController {
         }
     }
 
+    async getLastLocation(req, res) {
+        const { id } = req.params;
+        try {
+            const location = await GPSDeviceRepository.getLastLocation(id);
+            res.status(200).json(location);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getHistoricalLocations(req, res) {
+        const { id } = req.params;
+        try {
+            const locations = await GPSDeviceRepository.getHistoricalLocations(id);
+            res.status(200).json(locations);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
     async updateGPSDevice(req, res) {
         const { id } = req.params;
         try {
@@ -44,19 +64,6 @@ class GPSDeviceController {
             res.status(200).json({
                 message: "Dispositivo GPS actualizado correctamente",
                 GPSDevice: updatedGPS
-            });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async deleteGPSDevice(req, res) {
-        const { id } = req.params;
-        try {
-            const deletedGPS = await GPSDeviceRepository.deleteGPSDevice(id);
-            res.status(200).json({
-                message: "Dispositivo GPS eliminado",
-                GPSDevice: deletedGPS
             });
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -83,21 +90,14 @@ class GPSDeviceController {
         }
     }
 
-    async getLastLocation(req, res) {
+    async deleteGPSDevice(req, res) {
         const { id } = req.params;
         try {
-            const location = await GPSDeviceRepository.getLastLocation(id);
-            res.status(200).json(location);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async getHistoricalLocations(req, res) {
-        const { id } = req.params;
-        try {
-            const locations = await GPSDeviceRepository.getHistoricalLocations(id);
-            res.status(200).json(locations);
+            const deletedGPS = await GPSDeviceRepository.deleteGPSDevice(id);
+            res.status(200).json({
+                message: "Dispositivo GPS eliminado",
+                GPSDevice: deletedGPS
+            });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

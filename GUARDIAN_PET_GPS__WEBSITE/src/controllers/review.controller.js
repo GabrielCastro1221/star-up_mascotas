@@ -5,6 +5,7 @@ class ReviewController {
         try {
             const reviewData = req.body;
             const newReview = await ReviewRepository.createReview(reviewData);
+            await MailerController.sendProductReviewEmail(user, product, newReview);
             res.status(201).json(newReview);
         } catch (error) {
             res.status(400).json({ message: error.message });

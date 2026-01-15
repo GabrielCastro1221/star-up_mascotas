@@ -48,6 +48,54 @@ class ProductController {
         }
     }
 
+    async getProductReviews(req, res) {
+        try {
+            const { id } = req.params;
+            const reviews = await ProductRepository.getProductReviews(id);
+            res.status(200).json(reviews);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getProductFeatures(req, res) {
+        try {
+            const { id } = req.params;
+            const features = await ProductRepository.getProductFeatures(id);
+            res.status(200).json({ features });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getFeatured(req, res) {
+        try {
+            const { page } = req.query;
+            const featured = await ProductRepository.getFeaturedProducts(page);
+            if (!featured.docs || featured.docs.length === 0) {
+                return res.status(404).json({ message: "No se encontraron productos destacados" });
+            }
+            res.status(200).json(featured);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async searchProducts(req, res) {
+        try {
+            const { query } = req.query;
+            const products = await ProductRepository.searchProducts(query);
+            if (products.length === 0) {
+                return res
+                    .status(404)
+                    .json({ message: "No se encontraron productos con ese término" });
+            }
+            res.status(200).json({ products });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
     async updateProduct(req, res) {
         const { id } = req.params;
         try {
@@ -73,19 +121,6 @@ class ProductController {
                 .json({ message: "Producto actualizado", producto: updatedProduct });
         } catch (error) {
             res.status(500).json({ message: error.message });
-        }
-    }
-
-    deleteProduct = async (req, res) => {
-        const pid = req.params.pid;
-        try {
-            const prod = await ProductRepository.deleteProduct(pid);
-            if (!prod) {
-                return res.status(404).json({ message: "Producto no encontrado" });
-            }
-            res.status(200).json({ message: "Producto eliminado", prod });
-        } catch (error) {
-            res.status(500).send("Error al eliminar el producto");
         }
     }
 
@@ -128,51 +163,16 @@ class ProductController {
         }
     }
 
-    async searchProducts(req, res) {
+    deleteProduct = async (req, res) => {
+        const pid = req.params.pid;
         try {
-            const { query } = req.query;
-            const products = await ProductRepository.searchProducts(query);
-            if (products.length === 0) {
-                return res
-                    .status(404)
-                    .json({ message: "No se encontraron productos con ese término" });
+            const prod = await ProductRepository.deleteProduct(pid);
+            if (!prod) {
+                return res.status(404).json({ message: "Producto no encontrado" });
             }
-            res.status(200).json({ products });
+            res.status(200).json({ message: "Producto eliminado", prod });
         } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async getProductReviews(req, res) {
-        try {
-            const { id } = req.params;
-            const reviews = await ProductRepository.getProductReviews(id);
-            res.status(200).json(reviews);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async getProductFeatures(req, res) {
-        try {
-            const { id } = req.params;
-            const features = await ProductRepository.getProductFeatures(id);
-            res.status(200).json({ features });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-
-    async getFeatured(req, res) {
-        try {
-            const { page } = req.query;
-            const featured = await ProductRepository.getFeaturedProducts(page);
-            if (!featured.docs || featured.docs.length === 0) {
-                return res.status(404).json({ message: "No se encontraron productos destacados" });
-            }
-            res.status(200).json(featured);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).send("Error al eliminar el producto");
         }
     }
 }

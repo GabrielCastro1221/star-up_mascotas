@@ -57,22 +57,6 @@ class ReviewRepository {
         }
     }
 
-    async deleteReview(reviewId) {
-        try {
-            const review = await reviewModel.findByIdAndDelete(reviewId);
-            if (review) {
-                await productModel.findByIdAndUpdate(
-                    review.product,
-                    { $pull: { reviews: review._id } }
-                );
-                await this.updateProductRating(review.product);
-            }
-            return review;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
     async updateProductRating(productId) {
         try {
             const reviews = await reviewModel.find({ product: productId });
@@ -85,6 +69,22 @@ class ReviewRepository {
                 averageRating,
                 totalRating
             });
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    async deleteReview(reviewId) {
+        try {
+            const review = await reviewModel.findByIdAndDelete(reviewId);
+            if (review) {
+                await productModel.findByIdAndUpdate(
+                    review.product,
+                    { $pull: { reviews: review._id } }
+                );
+                await this.updateProductRating(review.product);
+            }
+            return review;
         } catch (error) {
             throw new Error(error.message);
         }

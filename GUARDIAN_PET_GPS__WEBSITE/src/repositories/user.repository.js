@@ -42,49 +42,6 @@ class UserRepository {
         }
     }
 
-    async updateUser(id, updateData) {
-        try {
-            const user = await userModel.findById(id);
-            if (!user) {
-                throw new Error("Usuario no encontrado");
-            }
-            Object.assign(user, updateData);
-            await user.save();
-            return user;
-        } catch (error) {
-            throw new Error(`Error al actualizar el usuario: ${error.message}`);
-        }
-    }
-
-    async deleteUser(id) {
-        try {
-            const user = await userModel.findByIdAndDelete(id);
-            if (!user) {
-                throw new Error("Usuario no encontrado");
-            }
-            return user;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
-    async changeRole(id, newRole) {
-        try {
-            const user = await userModel.findById(id);
-            if (!user) {
-                throw new Error("Usuario no encontrado");
-            }
-            const updatedUser = await userModel.findByIdAndUpdate(
-                id,
-                { rol: newRole },
-                { new: true }
-            );
-            return updatedUser;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-
     async getUserProfile(id) {
         try {
             const user = await userModel.findById(id);
@@ -118,6 +75,49 @@ class UserRepository {
             return user.tickets;
         } catch (error) {
             throw new Error(`Error al obtener los tickets del usuario: ${error.message}`);
+        }
+    }
+
+    async updateUser(id, updateData) {
+        try {
+            const user = await userModel.findById(id);
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+            Object.assign(user, updateData);
+            await user.save();
+            return user;
+        } catch (error) {
+            throw new Error(`Error al actualizar el usuario: ${error.message}`);
+        }
+    }
+
+    async changeRole(id, newRole) {
+        try {
+            const user = await userModel.findById(id);
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+            const updatedUser = await userModel.findByIdAndUpdate(
+                id,
+                { rol: newRole },
+                { new: true }
+            );
+            return updatedUser;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    async deleteUser(id) {
+        try {
+            const user = await userModel.findByIdAndDelete(id);
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+            return user;
+        } catch (error) {
+            throw new Error(error.message);
         }
     }
 }
