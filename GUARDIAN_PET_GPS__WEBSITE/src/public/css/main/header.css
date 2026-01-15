@@ -67,7 +67,7 @@ nav a:hover {
 .toggle-menu {
     display: none;
     cursor: pointer;
-    background-image: url(../assets/images/menu-burger.svg);
+    background-image: url(../../assets/images/menu-burger.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 28px;
@@ -78,7 +78,7 @@ nav a:hover {
 
 .lightDark {
     cursor: pointer;
-    background-image: url(../assets/images/night-mode.png);
+    background-image: url(../../assets/images/night-mode.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 22px;
@@ -90,7 +90,7 @@ nav a:hover {
 }
 
 .lightDark.active {
-    background-image: url(../assets/images/day-mode.png);
+    background-image: url(../../assets/images/day-mode.png);
 }
 
 @media screen and (max-width: 1150px) {
@@ -102,7 +102,7 @@ nav a:hover {
         position: fixed;
         right: 5%;
         top: 1.5em;
-        background-image: url(../assets/images/cross.svg);
+        background-image: url(../../assets/images/cross.svg);
         background-size: 24px;
         z-index: 1001;
     }

@@ -5,6 +5,7 @@ const upload = require("../middlewares/cloudinary.middleware");
 const router = Router();
 
 router.post("/create", UserController.createUser);
+router.post("/register-guest", UserController.registerGuest);
 router.get("/", UserController.getUsers);
 router.get("/profile/me", auth.authenticate, auth.restrict(["user", "admin"]), UserController.getUserProfile);
 router.get("/:id/tickets", UserController.getUserTickets);

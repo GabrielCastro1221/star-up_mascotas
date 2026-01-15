@@ -30,8 +30,12 @@
     gap: 1em;
 }
 
-i {
-    margin-left: 0.5em;
+.page-btn i {
+    color: #fff;
+}
+
+.page-btn:hover i {
+    color: var(--cl--3--);
 }
 
 .deals h2 {
@@ -85,12 +89,22 @@ i {
 .p-content h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--cl--2--);
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
     margin-bottom: 0.5em;
 }
 
 .p-content p {
     font-size: 0.95rem;
     color: var(--cl--2--);
-    margin-bottom: 1em;
+}
+
+.detail-price strong {
+    font-weight: 600;
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+}
+
+.detail-price {
+    font-weight: 600;
 }

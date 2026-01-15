@@ -180,6 +180,11 @@ p strong {
     margin-bottom: 2em;
 }
 
+.add-cart-btn-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
     .detail-grid {
         grid-template-columns: 1fr;

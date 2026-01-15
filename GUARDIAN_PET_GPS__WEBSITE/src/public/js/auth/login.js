@@ -16,10 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify(userData),
                 credentials: "include"
             });
+
             const result = await response.json();
+
             if (response.ok) {
                 localStorage.setItem("user", JSON.stringify(result.data));
                 localStorage.setItem("token", result.data.token);
+
                 Toastify({
                     text: "Inicio de sesión exitoso",
                     duration: 3000,
@@ -31,10 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         borderRadius: "8px"
                     }
                 }).showToast();
+
                 form.reset();
+
                 setTimeout(() => {
-                    window.location.href = "/perfil-usuario";
+                    if (result.data.rol === "admin") {
+                        window.location.href = "/perfil-admin";
+                    } else {
+                        window.location.href = "/perfil-usuario";
+                    }
                 }, 3000);
+
             } else {
                 Toastify({
                     text: result.message || "Credenciales incorrectas",

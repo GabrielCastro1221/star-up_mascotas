@@ -162,6 +162,19 @@ class ProductController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    async getFeatured(req, res) {
+        try {
+            const { page } = req.query;
+            const featured = await ProductRepository.getFeaturedProducts(page);
+            if (!featured.docs || featured.docs.length === 0) {
+                return res.status(404).json({ message: "No se encontraron productos destacados" });
+            }
+            res.status(200).json(featured);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = new ProductController();

@@ -1,5 +1,8 @@
+const cartModel = require("../models/cart.model");
+const CartRepository = require("../repositories/cart.repository");
 const UserRepository = require("../repositories/user.repository");
 const MailerController = require("../services/mailer/nodemailer.services");
+const { generateToken } = require("../utils/generateToken.util");
 
 class UserController {
     async createUser(req, res) {
@@ -10,6 +13,35 @@ class UserController {
             res.status(200).json({
                 message: "Usuario registrado con exito",
                 usuario: userData
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async registerGuest(req, res) {
+        try {
+            const userData = req.body;
+            const user = await UserRepository.createUser(userData);
+            const newCart = new cartModel({ products: [] });
+            await newCart.save();
+            user.cart = newCart._id;
+            await user.save();
+            const guestId = req.body.guestId;
+            await CartRepository.migrateGuestCartToUser(guestId, newCart._id);
+            await MailerController.userRegister(userData);
+            const token = generateToken(user);
+            const { password, ...rest } = user._doc;
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: false,
+                maxAge: 1000 * 60 * 60,
+            });
+            res.status(200).json({
+                message: "Usuario registrado, carrito migrado y sesión iniciada",
+                usuario: rest,
+                cart: newCart,
+                token,
             });
         } catch (error) {
             res.status(500).json({ message: error.message });

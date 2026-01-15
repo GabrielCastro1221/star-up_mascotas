@@ -22,6 +22,58 @@ class CartRepository {
         }
     }
 
+    async addProductInGuestCart(guestId, productId, quantity = 1) {
+        try {
+            let cart = await cartModel.findOne({ guestId });
+            if (!cart) {
+                cart = new cartModel({
+                    guestId,
+                    products: [{ product: productId, quantity }]
+                });
+            } else {
+                const existingProduct = cart.products.find(
+                    (item) => item.product.toString() === productId
+                );
+                if (existingProduct) {
+                    existingProduct.quantity += quantity;
+                } else {
+                    cart.products.push({ product: productId, quantity });
+                }
+            }
+            cart.markModified("products");
+            await cart.save();
+            return await cart.populate("products.product", "_id title price image");
+        } catch (error) {
+            throw new Error("Error al agregar producto al carrito invitado: " + error.message);
+        }
+    }
+
+    async migrateGuestCartToUser(guestId, userCartId) {
+        try {
+            const guestCart = await cartModel.findOne({ guestId });
+            if (!guestCart) throw new Error("Carrito invitado no encontrado");
+            const userCart = await cartModel.findById(userCartId);
+            if (!userCart) throw new Error("Carrito de usuario no encontrado");
+            guestCart.products.forEach((item) => {
+                const existingProduct = userCart.products.find(
+                    (p) => p.product.toString() === item.product.toString()
+                );
+                if (existingProduct) {
+                    existingProduct.quantity += item.quantity;
+                } else {
+                    userCart.products.push({ product: item.product, quantity: item.quantity });
+                }
+            });
+            userCart.markModified("products");
+            await userCart.save();
+            guestCart.products = [];
+            await guestCart.save();
+            return userCart;
+        } catch (error) {
+            throw new Error("Error al migrar carrito invitado: " + error.message);
+        }
+    }
+
     async getProductsInCart(cartId) {
         try {
             const cart = await cartModel
@@ -37,6 +89,37 @@ class CartRepository {
         } catch (error) {
             logger.error("Error al obtener los productos del carrito:", error.message);
             throw new Error("Error al obtener los productos del carrito");
+        }
+    }
+
+    async getCartById(id) {
+        try {
+            const cart = await cartModel
+                .findById(id)
+                .populate("products.product", "_id title price image")
+                .lean();
+            if (!cart) {
+                throw new Error("Carrito de compras no encontrado");
+            }
+            return cart;
+        } catch (error) {
+            logger.error("Error al obtener carrito de compreas:", error.message);
+            throw new Error(error.message);
+        }
+    }
+
+    async getCartByGuestId(guestId) {
+        try {
+            const cart = await cartModel.findOne({ guestId }).populate("products.product", "_id title price image").lean();
+            if (!cart) {
+                logger.warning("Carrito invitado no encontrado");
+                return null;
+            }
+            return cart;
+        }
+        catch (error) {
+            logger.error("Error al obtener carrito invitado:", error.message);
+            throw new Error(error.message);
         }
     }
 
@@ -56,6 +139,22 @@ class CartRepository {
         }
     }
 
+    async deleteProductInGuestCart(guestId, productId) {
+        try {
+            const cart = await cartModel.findOne({ guestId });
+            if (!cart) {
+                throw new Error("Carrito invitado no encontrado");
+            }
+            cart.products = cart.products.filter(
+                (item) => item.product.toString() !== productId
+            );
+            await cart.save();
+            return cart;
+        } catch (error) {
+            throw new Error("Error al eliminar producto del carrito invitado: " + error.message);
+        }
+    }
+
     async emptyCart(cartId) {
         try {
             const cart = await cartModel.findByIdAndUpdate(
@@ -72,19 +171,19 @@ class CartRepository {
         }
     }
 
-    async getCartById(id) {
+    async emptyGuestCart(guestId) {
         try {
-            const cart = await cartModel
-                .findById(id)
-                .populate("products.product", "_id title price image")
-                .lean();
+            const cart = await cartModel.findOneAndUpdate(
+                { guestId },
+                { products: [] },
+                { new: true }
+            );
             if (!cart) {
-                throw new Error("Carrito de compras no encontrado");
+                throw new Error("Carrito invitado no encontrado");
             }
             return cart;
         } catch (error) {
-            logger.error("Error al obtener carrito de compreas:", error.message);
-            throw new Error(error.message);
+            throw new Error("Error al vaciar carrito invitado: " + error.message);
         }
     }
 }

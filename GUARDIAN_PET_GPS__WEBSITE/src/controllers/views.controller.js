@@ -5,14 +5,58 @@ const CategoryRepository = require("../repositories/category.repository");
 const CartRepository = require("../repositories/cart.repository");
 const ShippingRepository = require("../repositories/shipping.repository");
 const TicketRepository = require("../repositories/ticket.repository");
-const UserRepository = require("../repositories/user.repository");
 
 class ViewController {
+    renderLogin = (req, res) => {
+        try {
+            res.render("login");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderRegister = (req, res) => {
+        try {
+            res.render("register");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderResetPass = (req, res) => {
+        try {
+            res.render("resetPass");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderChangePass = (req, res) => {
+        try {
+            res.render("changePass");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderEmailConfirm = (req, res) => {
+        try {
+            res.render("emailConfirm");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
     renderIndex = async (req, res) => {
         try {
             const pageInfo = await ConfigPageRepository.findAll();
             const CompanyInfo = await GuardianPetConfigRepository.findAll();
-            res.render("index", { pageInfo, CompanyInfo });
+            const ProductsFeatured = await ProductRepository.getFeaturedProducts();
+            res.render("index", {
+                pageInfo,
+                CompanyInfo,
+                ProductsFeatured: ProductsFeatured.docs
+            });
         } catch (error) {
             res.render("pageNotFound");
         }
@@ -75,6 +119,14 @@ class ViewController {
         }
     };
 
+    renderRegisterGuest = (req, res) => {
+        try {
+            res.render("registerGuest");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
     renderFoundPet = (req, res) => {
         try {
             res.render("foundPet");
@@ -108,49 +160,17 @@ class ViewController {
         }
     };
 
-    renderLogin = (req, res) => {
-        try {
-            res.render("login");
-        } catch (error) {
-            res.render("pageNotFound");
-        }
-    };
-
-    renderRegister = (req, res) => {
-        try {
-            res.render("register");
-        } catch (error) {
-            res.render("pageNotFound");
-        }
-    };
-
-    renderResetPass = (req, res) => {
-        try {
-            res.render("resetPass");
-        } catch (error) {
-            res.render("pageNotFound");
-        }
-    };
-
-    renderChangePass = (req, res) => {
-        try {
-            res.render("changePass");
-        } catch (error) {
-            res.render("pageNotFound");
-        }
-    };
-
-    renderEmailConfirm = (req, res) => {
-        try {
-            res.render("emailConfirm");
-        } catch (error) {
-            res.render("pageNotFound");
-        }
-    };
-
     renderProfileUser = (req, res) => {
         try {
             res.render("profileUser");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderProfileAdmin = (req, res) => {
+        try {
+            res.render("profileAdmin");
         } catch (error) {
             res.render("pageNotFound");
         }

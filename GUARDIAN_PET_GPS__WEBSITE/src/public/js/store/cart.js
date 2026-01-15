@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+    function getGuestId() {
+        let guestId = localStorage.getItem("guestId");
+        if (!guestId) {
+            guestId = crypto.randomUUID();
+            localStorage.setItem("guestId", guestId);
+        }
+        return guestId;
+    }
+
+    const checkoutBtn = document.querySelector(".checkout-btn");
+    const registerGuestBtn = document.querySelector(".register-guest-btn");
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const cartId = userData?.cart;
+
+    if (cartId) {
+        checkoutBtn.style.display = "block";
+        registerGuestBtn.style.display = "none";
+    } else {
+        checkoutBtn.style.display = "none";
+        registerGuestBtn.style.display = "block";
+    }
+
     document.addEventListener("click", async (e) => {
         const btn = e.target.closest(".remove-btn");
         if (btn) {
@@ -7,13 +29,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const cartId = userData?.cart;
 
             try {
-                const response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
-                    method: "DELETE",
-                });
+                let response;
+
+                if (cartId) {
+                    response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
+                        method: "DELETE",
+                    });
+                } else {
+                    const guestId = getGuestId();
+                    response = await fetch(`/api/v1/cart/guest/${guestId}/products/${productId}`, {
+                        method: "DELETE",
+                    });
+                }
+
                 const data = await response.json();
 
                 Toastify({
-                    text: data.message || "Producto eliminado del carrito de compras",
+                    text: data.message || "Producto eliminado del carrito",
                     duration: 3000,
                     gravity: "top",
                     position: "right",
@@ -39,21 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const userData = JSON.parse(localStorage.getItem("user"));
         const cartId = userData?.cart;
 
-        if (!cartId) {
-            Toastify({
-                text: "No tienes un carrito activo",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "#ff4d4d",
-            }).showToast();
-            return;
-        }
-
         try {
-            const response = await fetch(`/api/v1/cart/${cartId}`, {
-                method: "DELETE",
-            });
+            let response;
+
+            if (cartId) {
+                response = await fetch(`/api/v1/cart/${cartId}`, {
+                    method: "DELETE",
+                });
+            } else {
+                const guestId = getGuestId();
+                response = await fetch(`/api/v1/cart/guest/${guestId}`, {
+                    method: "DELETE",
+                });
+            }
 
             const data = await response.json();
 
@@ -77,13 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }).showToast();
         }
     });
-    
+
     const citySelect = document.getElementById("city");
     const subtotalEl = document.getElementById("subtotal");
     const shippingEl = document.getElementById("shipping");
     const totalEl = document.getElementById("total");
 
-    citySelect.addEventListener("change", () => {
+    citySelect?.addEventListener("change", () => {
         const shipping = Number(citySelect.value);
         const subtotal = Number(
             subtotalEl.textContent.replace("$", "").replace(",", "").trim()

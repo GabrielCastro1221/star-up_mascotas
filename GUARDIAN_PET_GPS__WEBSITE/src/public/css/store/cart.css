@@ -192,6 +192,18 @@
     color: #fff;
     border-radius: 8px;
 }
+.register-guest-btn {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: var(--cl--3--);
+    color: #fff;
+    border-radius: 8px;
+}
+
+.checkout-btn,
+.register-guest-btn {
+    display: none;
+}
 
 .cart-empty {
     text-align: center;
