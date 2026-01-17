@@ -21,5 +21,6 @@ router.get("/access-denied", ViewsController.renderAccessDenied);
 router.get("/page-not-found", ViewsController.renderNotFound);
 router.get("/perfil-usuario", auth.authenticate, auth.restrict(["user"]), ViewsController.renderProfileUser);
 router.get("/perfil-admin", auth.authenticate, auth.restrict(["admin"]), ViewsController.renderProfileAdmin);
+router.get("/dashboard", auth.authenticate, auth.restrict(["admin"]), ViewsController.renderAdminDashboard);
 
 module.exports = router;

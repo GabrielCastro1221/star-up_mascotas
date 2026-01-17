@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/css/profileAdmin/categories.css">
+
+<section class="admin-section">
+    <h2>Categorías <span>Registradas</span></h2>
+    {{#if categories.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Nombre de la Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each categories}}
+            <tr>
+                <td>{{this.category}}</td>
+                <td class="action">
+                    <button class="page-btn admin" data-id="{{this._id}}" data-action="edit">Editar</button>
+                    <button class="page-btn danger" data-id="{{this._id}}" data-action="delete">Eliminar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="no-data">No hay categorías registradas en la plataforma en el momento.</p>
+    {{/if}}
+    <div class="add-category">
+        <h3>Agregar nueva categoría</h3>
+        <form id="addCategoryForm">
+            <input type="text" name="category" placeholder="Nombre de la categoría" required />
+            <button type="submit" class="page-btn user">Agregar</button>
+        </form>
+    </div>
+</section>
+
+<script src="/js/profileAdmin/categories.js"></script>

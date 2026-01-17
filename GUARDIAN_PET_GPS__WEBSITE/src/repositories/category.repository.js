@@ -26,6 +26,29 @@ class CategoryRepository {
         }
     }
 
+    async updateCategory(categoryId, newData) {
+        try {
+            const existingCategory = await categoryModel.findById(categoryId);
+            if (!existingCategory) {
+                throw new Error("La categoría no existe");
+            }
+            if (newData.category) {
+                const duplicate = await categoryModel.findOne({ category: newData.category });
+                if (duplicate && duplicate._id.toString() !== categoryId) {
+                    throw new Error("Ya existe una categoría con ese nombre");
+                }
+            }
+            const updatedCategory = await categoryModel.findByIdAndUpdate(
+                categoryId,
+                { $set: newData },
+                { new: true, runValidators: true }
+            );
+            return updatedCategory;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
     async deleteCategory(categoryId) {
         try {
             const deletedCategory = await categoryModel.findByIdAndDelete(categoryId);

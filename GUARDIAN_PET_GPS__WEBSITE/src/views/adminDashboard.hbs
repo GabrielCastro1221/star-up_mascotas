@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="/css/profileAdmin/dashboard.css">
+
+<div class="dash-content container row" id="dashboard">
+    {{#if (eq section "usuarios")}}
+    {{> adminProfile/users}}
+    {{/if}}
+
+    {{#if (eq section "carritos")}}
+    {{> adminProfile/carts}}
+    {{/if}}
+
+    {{#if (eq section "productos")}}
+    {{> adminProfile/products}}
+    {{/if}}
+
+    {{#if (eq section "categorias")}}
+    {{> adminProfile/categories}}
+    {{/if}}
+
+    {{#if (eq section "gps")}}
+    {{> adminProfile/gpsDevices}}
+    {{/if}}
+
+    {{#if (eq section "configGuardianPet")}}
+    {{> adminProfile/configGuardianPet}}
+    {{/if}}
+
+    {{#if (eq section "configPage")}}
+    {{> adminProfile/configPage}}
+    {{/if}}
+
+    {{#if (eq section "ubicaciones")}}
+    {{> adminProfile/locations}}
+    {{/if}}
+
+    {{#if (eq section "envios")}}
+    {{> adminProfile/shipping}}
+    {{/if}}
+
+    {{#if (eq section "mascotas")}}
+    {{> adminProfile/pets}}
+    {{/if}}
+
+    {{#if (eq section "tickets")}}
+    {{> adminProfile/tickets}}
+    {{/if}}
+
+    {{#if (eq section "resenas")}}
+    {{> adminProfile/reviews}}
+    {{/if}}
+</div>

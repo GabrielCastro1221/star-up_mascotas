@@ -23,14 +23,20 @@ module.exports = (app) => {
                     const options = { day: "2-digit", month: "short", year: "numeric" };
                     return new Date(date).toLocaleDateString("es-ES", options);
                 },
-                eq: function (a, b, options) {
-                    return a === b ? options.fn(this) : options.inverse(this);
+                eq: function (a, b) {
+                    return a === b;
                 },
                 truncate: function (str, len) {
                     if (str.length > len) {
                         return str.substring(0, len) + "...";
                     }
                     return str;
+                },
+                add: function (a, b) {
+                    return a + b;
+                },
+                subtract: function (a, b) {
+                    return a - b;
                 }
             }
         })

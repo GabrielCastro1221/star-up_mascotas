@@ -1,0 +1,80 @@
+.admin-section {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.admin-section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--cl--2--);
+}
+
+.admin-section h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.6rem;
+    text-align: center;
+    border-bottom: 1px solid var(--cl--2--);
+}
+
+.admin-table th {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    font-weight: 600;
+}
+
+.admin-table tr:hover {
+    background: rgba(175, 162, 255, 0.07);
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-category {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid var(--cl--2--);
+}
+
+.add-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--cl--3--);
+}
+
+.add-category form {
+    display: flex;
+    gap: 10px;
+}
+
+.add-category input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--cl--2--);
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cl--2--);
+    margin-top: 1rem;
+}

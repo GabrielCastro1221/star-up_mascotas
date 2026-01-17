@@ -5,6 +5,7 @@ const CategoryRepository = require("../repositories/category.repository");
 const CartRepository = require("../repositories/cart.repository");
 const ShippingRepository = require("../repositories/shipping.repository");
 const TicketRepository = require("../repositories/ticket.repository");
+const UserRepository = require("../repositories/user.repository");
 
 class ViewController {
     renderLogin = (req, res) => {
@@ -171,6 +172,37 @@ class ViewController {
     renderProfileAdmin = (req, res) => {
         try {
             res.render("profileAdmin");
+        } catch (error) {
+            res.render("pageNotFound");
+        }
+    };
+
+    renderAdminDashboard = async (req, res) => {
+        try {
+            const section = req.query.section || "usuarios";
+            const result = await UserRepository.getUsers({ page: req.query.page || 1 });
+            const users = result.docs;
+            const categories = await CategoryRepository.getCategories();
+            const shipping = await ShippingRepository.getShipping();
+            if (!users || users.length === 0) {
+                return res.render("adminDashboard", {
+                    section,
+                    users: [],
+                    message: "No hay usuarios registrados en la plataforma en el momento."
+                });
+            }
+            res.render("adminDashboard", {
+                section,
+                users,
+                categories,
+                shipping,
+                pagination: {
+                    page: result.page,
+                    totalPages: result.totalPages,
+                    hasNextPage: result.hasNextPage,
+                    hasPrevPage: result.hasPrevPage
+                }
+            });
         } catch (error) {
             res.render("pageNotFound");
         }

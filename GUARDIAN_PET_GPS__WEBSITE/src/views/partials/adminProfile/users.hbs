@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/profileAdmin/users.css">
+
+<section class="admin-section">
+    <h2>Usuarios <span>Registrados</span></h2>
+    {{#if users.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>
+                    {{#if foto}}
+                    <img src="{{foto}}" alt="{{nombre}}" class="user-avatar" />
+                    {{else}}
+                    <div class="user-avatar placeholder">{{nombre.[0]}}</div>
+                    {{/if}}
+                </td>
+                <td>{{nombre}}</td>
+                <td>{{email}}</td>
+                <td><span class="badge {{rol}}">{{rol}}</span></td>
+                <td>{{telefono}}</td>
+                <td>{{ciudad}}</td>
+                <td>{{edad}}</td>
+                <td class="action">
+                    <button class="page-btn admin" data-id="{{_id}}" data-action="admin">Rol Admin</button>
+                    <button class="page-btn user" data-id="{{_id}}" data-action="user">Rol Usuario</button>
+                    <button class="page-btn danger" data-id="{{_id}}" data-action="delete">Eliminar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {{#if pagination.hasPrevPage}}
+        <a href="/dashboard?section=usuarios&page={{subtract pagination.page 1}}" class="page-btn small">Anterior</a>
+        {{/if}}
+        <span>Página {{pagination.page}} de {{pagination.totalPages}}</span>
+        {{#if pagination.hasNextPage}}
+        <a href="/dashboard?section=usuarios&page={{add pagination.page 1}}" class="page-btn small">Siguiente</a>
+        {{/if}}
+    </div>
+    {{else}}
+    <p class="no-data">No hay usuarios registrados en la plataforma en el momento.</p>
+    {{/if}}
+</section>
+
+<script src="/js/profileAdmin/users.js"></script>

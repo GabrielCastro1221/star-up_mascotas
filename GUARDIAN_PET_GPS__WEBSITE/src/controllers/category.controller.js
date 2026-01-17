@@ -4,8 +4,11 @@ class CategoryController {
     async createCategory(req, res) {
         try {
             const categoryData = req.body;
-            await CategoryRepository.createCategory(categoryData);
-            res.status(201).json({ message: "Categoria creada con exito", category: categoryData});
+            const newCategory = await CategoryRepository.createCategory(categoryData);
+            res.status(201).json({
+                message: "Categoría creada con éxito",
+                category: newCategory
+            });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
@@ -18,6 +21,20 @@ class CategoryController {
                 return res.status(404).json({ message: "No hay categorías disponibles" });
             }
             res.status(200).json({ categories });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    async updateCategory(req, res) {
+        try {
+            const { id } = req.params;
+            const newData = req.body;
+            const updatedCategory = await CategoryRepository.updateCategory(id, newData);
+            res.status(200).json({
+                message: "Categoría actualizada con éxito",
+                category: updatedCategory
+            });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
