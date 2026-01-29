@@ -6,6 +6,7 @@ const CartRepository = require("../repositories/cart.repository");
 const ShippingRepository = require("../repositories/shipping.repository");
 const TicketRepository = require("../repositories/ticket.repository");
 const UserRepository = require("../repositories/user.repository");
+const PetRepository = require("../repositories/pet.repository");
 
 class ViewController {
     renderLogin = (req, res) => {
@@ -184,24 +185,38 @@ class ViewController {
             const users = result.docs;
             const categories = await CategoryRepository.getCategories();
             const shipping = await ShippingRepository.getShipping();
-            if (!users || users.length === 0) {
-                return res.render("adminDashboard", {
-                    section,
-                    users: [],
-                    message: "No hay usuarios registrados en la plataforma en el momento."
-                });
-            }
+            const petsResult = await PetRepository.getPets({ page: req.query.page || 1 });
+            const pets = petsResult.docs;
+            const productsResult = await ProductRepository.getPaginatedProducts({
+                page: req.query.page || 1,
+                limit: 6,
+                sort: req.query.sort || "asc",
+                query: req.query.query || null,
+            });
+            const productos = productsResult.productos;
+            const productosPagination = productsResult.pagination;
+            const categoriasProductos = productsResult.categorias;
             res.render("adminDashboard", {
                 section,
                 users,
                 categories,
                 shipping,
+                pets,
+                productos,
+                categoriasProductos,
                 pagination: {
                     page: result.page,
                     totalPages: result.totalPages,
                     hasNextPage: result.hasNextPage,
-                    hasPrevPage: result.hasPrevPage
-                }
+                    hasPrevPage: result.hasPrevPage,
+                },
+                petsPagination: {
+                    page: petsResult.page,
+                    totalPages: petsResult.totalPages,
+                    hasNextPage: petsResult.hasNextPage,
+                    hasPrevPage: petsResult.hasPrevPage,
+                },
+                productosPagination,
             });
         } catch (error) {
             res.render("pageNotFound");

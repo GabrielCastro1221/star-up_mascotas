@@ -1,3 +1,45 @@
+<link rel="stylesheet" href="/css/profileAdmin/pets.css">
+
 <section class="admin-section">
-    <h1>pets</h1>
+    <h2>Mascotas <span>Registradas</span></h2>
+    {{#if pets.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Raza</th>
+                <th>Especie</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each pets}}
+            <tr>
+                <td>
+                    {{#if this.foto}}
+                    <img src="{{this.foto}}" alt="{{this.nombre_mascota}}" class="pet-avatar" />
+                    {{else}}
+                    <div class="pet-avatar placeholder">{{this.nombre_mascota.[0]}}</div>
+                    {{/if}}
+                </td>
+                <td>{{this.nombre_mascota}}</td>
+                <td>{{this.edad}}</td>
+                <td>{{this.raza}}</td>
+                <td>{{this.especie}}</td>
+                <td class="action">
+                    <button class="page-btn admin" data-id="{{this._id}}" data-action="edit">Editar</button>
+                    <button class="page-btn danger" data-id="{{this._id}}" data-action="delete">Eliminar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="no-data">No hay mascotas registradas en la plataforma en el momento.</p>
+    {{/if}}
 </section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/profileAdmin/pets.js"></script>

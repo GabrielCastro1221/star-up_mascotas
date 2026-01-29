@@ -92,6 +92,41 @@ class CartRepository {
         }
     }
 
+    async getPaginatedCarts({ page = 1, limit = 10 }) {
+        try {
+            const options = {
+                page,
+                limit,
+                populate: { path: "products.product", select: "_id title price image" },
+                lean: true
+            };
+
+            const result = await cartModel.paginate({}, options);
+
+            if (!result.docs || result.docs.length === 0) {
+                logger.warning("No se encontraron carritos");
+                return { carts: [], pagination: result };
+            }
+
+            return {
+                carts: result.docs,
+                pagination: {
+                    totalDocs: result.totalDocs,
+                    totalPages: result.totalPages,
+                    page: result.page,
+                    limit: result.limit,
+                    hasNextPage: result.hasNextPage,
+                    hasPrevPage: result.hasPrevPage,
+                    nextPage: result.nextPage,
+                    prevPage: result.prevPage
+                }
+            };
+        } catch (error) {
+            logger.error("Error al obtener carritos paginados:", error.message);
+            throw new Error("Error al obtener carritos paginados");
+        }
+    }
+
     async getCartById(id) {
         try {
             const cart = await cartModel

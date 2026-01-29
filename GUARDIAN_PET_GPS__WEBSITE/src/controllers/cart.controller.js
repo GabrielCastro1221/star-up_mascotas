@@ -112,6 +112,23 @@ class CartController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    async getPaginatedCarts(req, res) {
+        try {
+            const { page = 1, limit = 10 } = req.query;
+            const { carts, pagination } = await CartRepository.getPaginatedCarts({
+                page: parseInt(page),
+                limit: parseInt(limit)
+            });
+            res.status(200).json({ status: true, carts, pagination });
+        } catch (error) {
+            res.status(500).json({
+                status: false,
+                message: "Error al obtener carritos paginados",
+                error: error.message
+            });
+        }
+    }
 }
 
 module.exports = new CartController();

@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const schema = new Schema({
     guestId: { type: String },
@@ -9,5 +10,7 @@ const schema = new Schema({
         },
     ],
 });
+
+schema.plugin(mongoosePaginate);
 
 module.exports = model("Cart", schema);

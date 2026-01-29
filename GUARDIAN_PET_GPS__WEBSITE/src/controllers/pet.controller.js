@@ -59,7 +59,7 @@ class PetController {
         const { id } = req.params;
         try {
             const deletedPet = await PetRepository.deletePet(id);
-            await MailerController.sendPetDeletedEmail(user, deletedPet);
+            await MailerController.sendPetDeletedEmail(deletedPet);
             res.status(200).json({ message: "Mascota eliminada", mascota: deletedPet });
         } catch (error) {
             res.status(500).json({ message: error.message });

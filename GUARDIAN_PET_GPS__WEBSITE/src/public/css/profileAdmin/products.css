@@ -1,0 +1,333 @@
+.admin-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--cl--1--);
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+}
+
+.admin-section h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--cl--2--);
+}
+
+.admin-section h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.9rem;
+    text-align: center;
+    border-bottom: 1px solid var(--cl--2--);
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    font-weight: 600;
+}
+
+.admin-table tr:hover {
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.product-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: var(--shadow--);
+}
+
+.product-thumb.placeholder {
+    background: var(--cl--5--);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--cl--1--);
+    border-radius: 8px;
+}
+
+.action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.page-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.page-btn.admin {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.page-btn.admin:hover {
+    background: var(--cl--3--);
+}
+
+.page-btn.danger {
+    background: var(--cl--6--);
+    color: var(--cl--1--);
+}
+
+.page-btn.danger:hover {
+    background: var(--cl--6--);
+}
+
+.page-btn.feature {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.page-btn.feature:hover {
+    background: var(--cl--3--);
+}
+
+.page-btn.new {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.page-btn.new:hover {
+    background: var(--cl--3--);
+}
+
+.page-btn.seller {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.page-btn.seller:hover {
+    background: var(--cl--3--);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    border: none;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background: var(--cl--3--);
+}
+
+.pagination span {
+    font-size: 0.9rem;
+    color: var(--cl--2--);
+}
+
+.no-data {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--cl--2--);
+    margin-top: 1rem;
+}
+
+.product-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--cl--1--);
+    border-radius: 12px;
+    box-shadow: var(--shadow--);
+}
+
+.product-form input,
+.product-form textarea,
+.product-form select {
+    padding: 0.8rem;
+    border: 1px solid var(--cl--2--);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+}
+
+.product-form textarea {
+    grid-column: span 2;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.product-form input:focus,
+.product-form textarea:focus,
+.product-form select:focus {
+    outline: none;
+    border-color: var(--cl--3--);
+    box-shadow: var(--shadow--);
+}
+
+.product-form label {
+    font-weight: 600;
+    color: var(--cl--2--);
+    grid-column: span 2;
+}
+
+.product-form button {
+    grid-column: span 2;
+    padding: 0.8rem 1.2rem;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.product-form button:hover {
+    background: var(--cl--3--);
+}
+
+#thumbnailsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.thumb-input {
+    flex: 1 1 45%;
+    padding: 0.6rem;
+    border: 1px solid var(--cl--1--);
+    border-radius: 6px;
+    background: var(--cl--5--);
+    cursor: pointer;
+}
+
+#addThumbnailBtn {
+    margin-bottom: 1rem;
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+#addThumbnailBtn:hover {
+    background: var(--cl--3--);
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.swal-label {
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-top: 0.5rem;
+}
+
+#swal-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.thumb-input {
+    flex: 1 1 45%;
+    padding: 0.4rem;
+    border: 1px solid var(--cl--1--);
+    border-radius: 6px;
+    background: var(--cl--5--);
+    cursor: pointer;
+}
+
+.swal-add-btn {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.swal-add-btn:hover {
+    background: var(--cl--3--);
+}
+
+@media (max-width: 768px) {
+    .product-form {
+        grid-template-columns: 1fr;
+    }
+
+    .product-form textarea,
+    .product-form label,
+    .product-form button {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .admin-table th,
+    .admin-table td {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .product-thumb {
+        width: 45px;
+        height: 45px;
+    }
+
+    .action {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .page-btn {
+        width: 100%;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

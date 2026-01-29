@@ -37,6 +37,12 @@ module.exports = (app) => {
                 },
                 subtract: function (a, b) {
                     return a - b;
+                },
+                reduce: function (array, key) {
+                    if (!Array.isArray(array)) return 0;
+                    return array.reduce((acc, item) => {
+                        return acc + (item[key] || 0);
+                    }, 0);
                 }
             }
         })
