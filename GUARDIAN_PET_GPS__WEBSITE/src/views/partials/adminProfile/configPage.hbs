@@ -1,3 +1,58 @@
+<link rel="stylesheet" href="/css/profileAdmin/configPage.css">
+
 <section class="admin-section">
-    <h1>Config Page</h1>
+    <h2>Configuración <span>de la Página</span></h2>
+
+    {{#if configPages.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <thead>
+                    <tr>
+                        <th>Encabezado Principal</th>
+                        <th>Texto Principal</th>
+                        <th>Listado de Servicios</th>
+                        <th>Descripción de Servicios</th>
+                        <th>Sección Sobre Nosotros</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each configPages}}
+            <tr>
+                <td data-label="Hero Title">{{this.hero_title}}</td>
+                <td data-label="Hero Subtitle">{{this.hero_subtitle}}</td>
+                <td data-label="Servicios">
+                    <ul class="services-list">
+                        {{#if this.service_1}}<li><strong>{{this.service_1}}</strong>: {{this.service_1_desc}}</li>
+                        {{/if}}
+                        {{#if this.service_2}}<li><strong>{{this.service_2}}</strong>: {{this.service_2_desc}}</li>
+                        {{/if}}
+                        {{#if this.service_3}}<li><strong>{{this.service_3}}</strong>: {{this.service_3_desc}}</li>
+                        {{/if}}
+                        {{#if this.service_4}}<li><strong>{{this.service_4}}</strong>: {{this.service_4_desc}}</li>
+                        {{/if}}
+                    </ul>
+                </td>
+                <td data-label="Texto Servicios">{{this.service_text}}</td>
+                <td data-label="About Us">
+                    <strong>{{this.about_us_title}}</strong><br>
+                    {{this.about_us_text}}<br>
+                    {{this.about_us_text_2}}
+                </td>
+                <td data-label="Acciones" class="action">
+                    <button class="page-btn success" data-id="{{this._id}}" data-action="edit">Editar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="no-data">No hay configuraciones creadas en la plataforma.</p>
+    {{/if}}
 </section>
+
+<script src="/js/profileAdmin/configPage.js"></script>

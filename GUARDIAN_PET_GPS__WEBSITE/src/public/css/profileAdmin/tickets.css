@@ -1,0 +1,180 @@
+.admin-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--cl--1--);
+    border-radius: 10px;
+    box-shadow: var(--shadow--);
+}
+
+.admin-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 1.2rem;
+    padding-left: 0.5rem;
+}
+
+.admin-section h2 span {
+    color: var(--cl--3--);
+    font-family: "DynaPuff", cursive;
+    font-weight: 700;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--cl--1--);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.admin-table thead {
+    background: var(--cl--3--);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cl--1--);
+}
+
+.admin-table th {
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: var(--cl--1--);
+    border-bottom: 1px solid var(--cl--2--);
+}
+
+.status {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status.pagado {
+    background: var(--cl--5--);
+    color: #27ae60;
+}
+
+.status.cancelado {
+    background: var(--cl--5--);
+    color: var(--cl--6--);
+}
+
+.page-btn {
+    padding: 0.45rem 0.9rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin: 0.2rem;
+}
+
+.page-btn.admin {
+    background: var(--cl--3--);
+    color: var(--cl--1--);
+}
+
+.page-btn.admin:hover {
+    background: var(--cl--3--);
+}
+
+.page-btn.success {
+    background: #27ae60;
+    color: var(--cl--1--);
+}
+
+.page-btn.success:hover {
+    background: #1e8449;
+}
+
+.page-btn.warning {
+    background: var(--cl--4--);
+    color: var(--cl--2--);
+}
+
+.page-btn.warning:hover {
+    background: var(--cl--4--);
+}
+
+.page-btn.danger {
+    background: var(--cl--6--);
+    color: var(--cl--1--);
+}
+
+.page-btn.danger:hover {
+    background: var(--cl--6--);
+}
+
+.pagination {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.pagination span {
+    margin: 0 1rem;
+    font-weight: 500;
+    color: var(--cl--2--);
+}
+
+.no-data {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+    color: var(--cl--2--);
+    background: var(--cl--5--);
+    border: 1px dashed var(--cl--1--);
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+
+    .admin-table,
+    .admin-table thead,
+    .admin-table tbody,
+    .admin-table th,
+    .admin-table td,
+    .admin-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table tr {
+        margin-bottom: 1rem;
+        background: var(--cl--1--);
+        border: 1px solid var(--cl--5--);
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: var(--shadow--);
+    }
+
+    .admin-table td {
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #2c3e50;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .action {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+}

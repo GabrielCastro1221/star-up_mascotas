@@ -181,21 +181,29 @@ class ViewController {
     renderAdminDashboard = async (req, res) => {
         try {
             const section = req.query.section || "usuarios";
-            const result = await UserRepository.getUsers({ page: req.query.page || 1 });
-            const users = result.docs;
+            const currentPage = parseInt(req.query.page) || 1;
+            const usersResult = await UserRepository.getUsers({ page: currentPage });
+            const users = usersResult.docs;
             const categories = await CategoryRepository.getCategories();
             const shipping = await ShippingRepository.getShipping();
-            const petsResult = await PetRepository.getPets({ page: req.query.page || 1 });
+            const petsResult = await PetRepository.getPets({ page: currentPage });
             const pets = petsResult.docs;
+
             const productsResult = await ProductRepository.getPaginatedProducts({
-                page: req.query.page || 1,
+                page: currentPage,
                 limit: 6,
                 sort: req.query.sort || "asc",
                 query: req.query.query || null,
             });
+
             const productos = productsResult.productos;
             const productosPagination = productsResult.pagination;
             const categoriasProductos = productsResult.categorias;
+            const ticketsResult = await TicketRepository.getTickets({ page: currentPage });
+            const tickets = ticketsResult;
+            const configPages = await ConfigPageRepository.findAll();
+            const guardianPetConfigs = await GuardianPetConfigRepository.findAll();
+
             res.render("adminDashboard", {
                 section,
                 users,
@@ -204,11 +212,14 @@ class ViewController {
                 pets,
                 productos,
                 categoriasProductos,
+                tickets,
+                configPages,
+                guardianPetConfigs,
                 pagination: {
-                    page: result.page,
-                    totalPages: result.totalPages,
-                    hasNextPage: result.hasNextPage,
-                    hasPrevPage: result.hasPrevPage,
+                    page: usersResult.page,
+                    totalPages: usersResult.totalPages,
+                    hasNextPage: usersResult.hasNextPage,
+                    hasPrevPage: usersResult.hasPrevPage,
                 },
                 petsPagination: {
                     page: petsResult.page,
